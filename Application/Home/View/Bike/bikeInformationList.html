@@ -2,23 +2,23 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
-		<link rel="stylesheet" href="../../../../Public/bootstrap/css/bootstrap.css" />
-		<script type="text/javascript" src="../../../../Public/bootstrap/js/jquery-1.9.1.min.js" ></script>
-		<script type="text/javascript" src="../../../../Public/bootstrap/js/bootstrap.min.js" ></script>
+		<title>单车一览</title>
+		<link rel="stylesheet" href="{$BASEPATH}Public/bootstrap/css/bootstrap.css" />
+		<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/bootstrap.min.js" ></script>
 		<script type="text/javascript">
 			//跳转页面，type=0表示按值跳转，type=1表示向前跳转，type=2表示向后跳转
 			function turnPage(pageNo,pageSize,type=0){
 				if(type == 2){
-					window.location.href="<?php echo URLROOT?>/index.php/Home/User/User/loadBikeByPage?pageNo="+(pageNo+1);
+					window.location.href="{$BASEPATH}index.php/Home/Bike/loadBikeByPage?pageNo="+(pageNo+1);
 				}else if(type == 1){
 					if(pageNo == 1){
 						alert("当前已经是第一页了");
 					}else{
-						window.location.href="<?php echo URLROOT?>/index.php/Home/User/User/loadBikeByPage?pageNo="+(pageNo-1);
+						window.location.href="{$BASEPATH}index.php/Home/Bike/loadBikeByPage?pageNo="+(pageNo-1);
 					}
 				}else{
-					window.location.href="<?php echo URLROOT?>/index.php/Home/User/User/loadBikeByPage?pageNo="+pageNo;
+					window.location.href="{$BASEPATH}index.php/Home/Bike/loadBikeByPage?pageNo="+pageNo;
 				}
 			}
 			function addOrUpdateHouse(type){
@@ -39,7 +39,7 @@
 					if (confirm("你确定修改吗？")) {
 						var hid = hid.eq(0).val();
 						$("#hId").val(hid);
-	        			$.post("<?php echo URLROOT?>/index.php/Home/User/User/loadPickHouse?hId="+hid,function(data){
+	        			$.post("<?php echo URLROOT?>/index.php/Home/User/loadPickHouse?hId="+hid,function(data){
 	        				$("#hArea").val(data["harea"]);
 		        			$("#hDevelop").val(data["hdevelop"]);
 		        			$("#hPrice").val(data["hprice"]);
@@ -50,14 +50,6 @@
 			        }
 				}
 			}
-			$(function(){
-				var str = "{$result}";
-				if(str != -1){
-					if(str == 0){
-						
-					}	
-				}
-			});
 		</script>
 	</head>
 	<body>
@@ -78,12 +70,21 @@
 			</tr>
 			<volist name="page.rows" id="m1">
 				<tr>
-					<td><input type="checkbox" value="{$m1.hid}"/></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
-					<td></td>
+					<td><input type="checkbox" value="{$m1.bid}"/></td>
+					<td>{$m1.bid}</td>
+					<td>
+						<if condition="($m1.bisused eq 0)">否
+						<else/>是
+						</if>
+					</td>
+					<td>
+						<if condition="($m1.bstate eq 0)">正常
+						<elseif condition="$m1.bstate eq 1"/>损坏
+						<else/>报废
+						</if>
+					</td>
+					<td>{$m1.bposition}</td>
+					<td>{$m1.ballroute}</td>
 				</tr>
 			</volist>
 		</table>
