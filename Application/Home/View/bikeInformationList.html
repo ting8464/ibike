@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+		<link rel="stylesheet" href="../../../Public/bootstrap/css/bootstrap.css" />
+		<script type="text/javascript" src="../../../Public/bootstrap/js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="../../../Public/bootstrap/js/bootstrap.min.js" ></script>
+	</head>
+	<body>
+		<div style="margin:1%;">
+			<button style="display:none;" "button" data-toggle="modal" data-target="#myModal" id="openWin">
+			<button type="button" onclick="addOrUpdateHouse(0)" class="btn btn-sm-info"><span class="glyphicon glyphicon-plus"></span>新增</button>
+			<button type="button" onclick="addOrUpdateHouse(1)" class="btn btn-sm-info"><span class="glyphicon glyphicon-pencil"></span>修改</button>
+			<button type="button" class="btn btn-sm-info"><span class="glyphicon glyphicon-trash"></span>删除</button>
+		</div>
+		<table id="mytable" class ="table table-hover table-bordered table-striped" style = "width: 98%;margin:1%">
+			<tr>
+				<th><input type="checkbox"/>多选框</th>
+				<th>单车编号</th>
+				<th>单车是否正在被使用</th>
+				<th>单车状态</th>
+				<th>单车位置</th>
+				<th>单车总计行程</th>
+			</tr>
+			<volist name="page.rows" id="m1">
+				<tr>
+					
+				</tr>
+			</volist>
+		</table>
+		<div style="margin-top:20px;" class="text-center">
+			<ul class="pagination" style="margin-top: -10px;">
+				<li><a href="javascript:void(0);">当前第<span style="color:red;">{$page.pageNo}</span>页</a></li>
+                <li><a href="javascript:turnPage({$page.pageNo},2,1);" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                <li><a href="javascript:turnPage(1,2);">1</a></li>
+                <li><a href="javascript:turnPage(2,2);">2</a></li>
+                <li><a href="javascript:turnPage(3,2);">3</a></li>
+                <li><a href="javascript:turnPage(4,2);">4</a></li>
+                <li><a href="javascript:turnPage(5,2);">5</a></li>
+                <li><a href="javascript:turnPage({$page.pageNo},2,2);" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                <li><a href="javascript:void(0);">共<span style="color:red;">{$page.total}</span>条记录</a></li>
+           	</ul>
+		</div>
+	</body>
+</html>
