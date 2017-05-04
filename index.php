@@ -21,7 +21,7 @@ define('APP_DEBUG',True);
 define('APP_PATH','./Application/');
 
 //定义的绝对路径
-define('BASEPATH', "http://localhost:8080/Thinkphp/");
+define('BASEPATH', "http://localhost:8080/ibike/");
 
 // 引入ThinkPHP入口文件
 require './ThinkPHP/ThinkPHP.php';
