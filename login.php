@@ -54,7 +54,7 @@
 				<img src="Public/img/tou.jpg" style="border-radius:100px;width: 100%;height: 100%;"/>
 			</div>
 			<div id="form">
-				<form action="#" method="post" class="form-horizontal" onsubmit="return checkForm(this)">
+				<form action="index.php/Home/Manager/login" method="post" class="form-horizontal" onsubmit="return checkForm(this)">
 					<div class="form-group form-inline has-feedback">
 						<label style="text-align: right;width: 20%;color: white;">帐号：</label>
 						<div class="input-group " style="width: 70%;"><!--//按钮加图标-->
