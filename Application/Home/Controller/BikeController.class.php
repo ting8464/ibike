@@ -19,7 +19,9 @@ class BikeController extends Controller{
         $total = $this->bikeModel->count();
         
         //->fetchSql(true)
-        $rows = $this->bikeModel->page($pageNo,$pageSize)->select();
+        $rows = $this->bikeModel->table("tb_bike b1, tb_platform p1")->
+        field("b1.bid,b1.bisused,b1.bstate,b1.bposition,b1.ballroute,p1.pposition")->where("b1.bsetposition = p1.pid")
+        ->page($pageNo,$pageSize)->select();
         $page = array("total"=>$total, "rows"=>$rows, "pageNo"=>$pageNo, "pageSize"=>$pageSize);
         
         $this->assign("page",$page);
