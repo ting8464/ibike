@@ -15,8 +15,8 @@
 			#form{margin-top: 30px;position:absolute/relative}
 		    #submit{margin-bottom: 5px;}
         </style>
-		<script type="text/javascript">  
-			function aaa(obj,reg){//单个验证,失去焦点 
+		<script type="text/javascript">
+			function aaa(obj,reg){//单个验证,失去焦点
 				$(obj).parent().removeClass("has-success has-error");//清除边框颜色
 				$(obj).parent().find(".glyphicon").removeClass("glyphicon-ok glyphicon-remove");//清除边框图标
 				$(obj).parent().find(".tishi").hide();//把提示隐藏
