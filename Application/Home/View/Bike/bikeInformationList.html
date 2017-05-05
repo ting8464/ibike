@@ -10,6 +10,13 @@
 			#mytable td,th{text-align:center;}
 		</style>
 		<script type="text/javascript">
+			$(function(){
+				$("#bNo").val("{$bNo}");
+				$("#bIsUsed").val("{$bIsUsed}");
+				$("#bState").val("{$bState}");
+				$("#bsetPosition").val("{$bsetPosition}");
+			});
+			
 			//跳转页面，type=0表示按值跳转，type=1表示向前跳转，type=2表示向后跳转
 			function turnPage(pageNo,pageSize,type=0){
 				if(type == 2){
@@ -53,10 +60,74 @@
 			        }
 				}
 			}
+			
+			function mark(){
+				var hid = $("#mytable input:checked");
+				if(hid.length == 0){
+					alert("对不起，请先选择一行进行编辑！！！");
+					return;
+				}
+				var selectedBike = Array();
+				for(var i = 0; i<hid.length; i++){
+					selectedBike[i] = hid.eq(i).val();
+				}
+				$("#selectedBike").val(selectedBike);
+				$("#changeBikeState").submit();
+			}
 		</script>
 	</head>
 	<body>
 		<div style="margin:1%;">
+			<div >
+				<form action = "{$BASEPATH}index.php/Home/Bike/loadBikeByPage" method="post">
+					<span>快速检索：</span>
+					<span>
+						<label>单车编号:</label>
+	            		<input type="text" style="width:7%" id="bNo" name = "bNo"/>
+					</span>
+					&nbsp;&nbsp;
+					<span >
+						<label>单车是否正在被使用:</label>
+						<select id="bIsUsed" name = "bIsUsed">
+							<option value="">请选择用车状态</option>
+							<option value=0>否</option>
+							<option value=1>是</option>
+						</select>
+					</span>
+					&nbsp;&nbsp;
+					<span>
+						<label>单车车况:</label>
+	            		<select id="bState" name = "bState">
+							<option value="">请选择车况</option>
+	            			<option value=0>正常</option>
+	            			<option value=1>损坏</option>
+	            			<option value=2>报废</option>
+	            		</select>  
+					</span>
+					&nbsp;&nbsp;
+					<span>
+						<label>单车投放位置:</label>
+						<select id="bsetPosition" name="bsetPosition">
+							<option value="">请选择单车投放位置</option>
+							<volist name="pPosition" id="p1">
+								<option value="{$p1.pid}">{$p1.pposition}</option>
+							</volist>
+						</select>
+					</span>
+					<input type="submit" value="搜索"/>
+					<input type="reset" value="重置"/>
+				</form>
+			</div>
+			<div>
+				<form id="changeBikeState" action="{$BASEPATH}index.php/Home/Bike/changeBikeState" method="post">
+					<span>故障标记：</span>
+					<input name="manage" checked value="0" type="radio"/>正常
+					<input name="manage" value="1" type="radio"/>损坏
+					<input name="manage" value="2" type="radio"/>报废
+					<input type="hidden" name="selectedBike" id="selectedBike"/>
+					<button type="button" onclick="mark();">确认</button>
+				</form>
+			</div>
 			<button style="display:none;" "button" data-toggle="modal" data-target="#myModal" id="openWin">
 			<button type="button" onclick="addOrUpdateHouse(0)" class="btn btn-sm-info"><span class="glyphicon glyphicon-plus"></span>新增</button>
 			<button type="button" onclick="addOrUpdateHouse(1)" class="btn btn-sm-info"><span class="glyphicon glyphicon-pencil"></span>修改</button>
@@ -70,12 +141,12 @@
 				<th>单车车况</th>
 				<th>单车所在位置</th>
 				<th>单车投放位置</th>
-				<th>单车总计行程</th>
+				<th>单车已行驶路程</th>
 			</tr>
 			<volist name="page.rows" id="m1">
 				<tr>
 					<td><input type="checkbox" value="{$m1.bid}"/></td>
-					<td>{$m1.bid}</td>
+					<td>{$m1.bno}</td>
 					<td>
 						<if condition="($m1.bisused eq 0)">否
 						<else/>是
@@ -111,29 +182,19 @@
 			    <div class="modal-content">
 			    	<div class="modal-header">
 				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title">增加单车</h4>
+				        <h4 class="modal-title">修改单车信息</h4>
 			    	</div>
 			        <form id="myform" method="post" action="{$BASEPATH}index.php/Home/Bike/addOrUpdateHouse">
 				    	<div class="modal-body">
-				    		<input type="hidden" id = "hId" name = "hId" value=""/>
+				    		<input type="hidden" id = "bId" name = "bId" value=""/>
 			            	<br/>
 			            	<div style="width:100%; text-align:center;" class="form-group">
-			            		<label for="hArea">地区：</label>
-			            		<input style="width:30%;" type="text" id="hArea" name="hArea"/>  
-			            		<label for="hDevelop">开发商：</label>
-			            		<input style="width:30%;" type="text" id="hDevelop" name="hDevelop"/>     		
-			            	</div>
-			            	<br/>
-			            	<div style="width:100%; text-align:center;" class="form-group">
-			            		<label for="hPrice">价格：</label>
-			            		<input style="width:30%;" type="text" id="hPrice" name="hPrice"/> 
-			            		<label for="hSort">户型：</label>
-			            		<input style="width:30%;" type="text" id="hSort" name="hSort"/>      		
-			            	</div>
-			            	<br/>
-			            	<div style="width:100%; text-align:center;" class="form-group">
-			            		<label for="hMore">更多详情：</label>
-			            		<textarea id="hMore" name="hMore" style="width:70%;"></textarea>     		
+			            		<label for="hArea">单车车况：</label>
+			            		<select name = "bState">
+			            			<option value=0>正常</option>
+			            			<option value=1>损坏</option>
+			            			<option value=2>报废</option>
+			            		</select>  		
 			            	</div>
 				    	</div>
 				    	<div class="modal-footer">

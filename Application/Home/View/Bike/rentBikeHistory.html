@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>租赁历史记录</title>
+		<link rel="stylesheet" href="{$BASEPATH}Public/bootstrap/css/bootstrap.css" />
+		<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/bootstrap.min.js" ></script>
+		<style type="text/css">
+			#mytable td,th{text-align:center;}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				$("#bNo").val("{$bNo}");
+				$("#rbStartPosition").val("{$rbStartPosition}");
+				$("#rbStartTime").val("{$rbStartTime}");
+				$("#uAccount").val("{$uAccount}");
+			});
+			
+			//跳转页面，type=0表示按值跳转，type=1表示向前跳转，type=2表示向后跳转
+			function turnPage(pageNo,pageSize,type=0){
+				if(type == 2){
+					window.location.href="{$BASEPATH}index.php/Home/Bike/rentBike?pageNo="+(pageNo+1);
+				}else if(type == 1){
+					if(pageNo == 1){
+						alert("当前已经是第一页了");
+					}else{
+						window.location.href="{$BASEPATH}index.php/Home/Bike/rentBike?pageNo="+(pageNo-1);
+					}
+				}else{
+					window.location.href="{$BASEPATH}index.php/Home/Bike/rentBike?pageNo="+pageNo;
+				}
+			}
+			function mark(){
+				var hid = $("#mytable input:checked");
+				if(hid.length == 0){
+					alert("对不起，请先选择一行进行编辑！！！");
+					return;
+				}
+				var selectedBike = Array();
+				for(var i = 0; i<hid.length; i++){
+					selectedBike[i] = hid.eq(i).val();
+				}
+				$("#selectedBike").val(selectedBike);
+				$("#changeBikeState").submit();
+			}
+		</script>
+	</head>
+	<body>
+		<div style="margin:1%;">
+			<div >
+				<form action = "{$BASEPATH}index.php/Home/Bike/rentBike" method="post">
+					<span>快速检索：</span>
+					<span>
+						<label>用户账号:</label>
+	            		<input type="text" style="width:7%" id="uAccount" name = "uAccount"/>
+					</span>
+					&nbsp;&nbsp;
+					<span>
+						<label>单车编号:</label>
+	            		<input type="text" style="width:7%" id="bNo" name = "bNo"/>
+					</span>
+					&nbsp;&nbsp;
+					<span>
+						<label>租车开始时间:</label>
+	            		<input type="text" style="width:7%" id="rbStartTime" name = "rbStartTime"/>
+					</span>
+					&nbsp;&nbsp;
+					<span>
+						<label>租车开始平台:</label>
+						<select id="rbStartPosition" name="rbStartPosition">
+							<option value="">请选择租车开始平台</option>
+							<volist name="pPosition" id="p1">
+								<option value="{$p1.pid}">{$p1.pposition}</option>
+							</volist>
+						</select>
+					</span>
+					<input type="submit" value="搜索"/>
+					<input type="reset" value="重置"/>
+				</form>
+			</div>
+			<button type="button" onclick="addOrUpdateHouse(0)" class="btn btn-sm-info"><span class="glyphicon glyphicon-floppy-save"></span>导出Excel</button>
+			<button type="button" onclick="addOrUpdateHouse(1)" class="btn btn-sm-info"><span class="glyphicon glyphicon-saved"></span>结束行程</button>
+		</div>
+		<table id="mytable" class ="table table-hover table-bordered table-striped" style = "width: 98%;margin:1%">
+			<tr>
+				<th><input type="checkbox"/>多选框</th>
+				<th>用户账号</th>
+				<th>单车编号</th>
+				<th>本次租车开始时间</th>
+				<th>本次租车开始平台</th>
+			</tr>
+			<volist name="page.rows" id="m1">
+				<tr>
+					<td><input type="checkbox" value="{$m1.rbid}"/></td>
+					<td>{$m1.uaccount}</td>
+					<td>{$m1.bno}</td>
+					<td>{$m1.rbstarttime}</td>
+					<td>{$m1.pposition}</td>
+				</tr>
+			</volist>
+		</table>
+		<div style="margin-top:20px;" class="text-center">
+			<ul class="pagination" style="margin-top: -10px;">
+				<li><a href="javascript:void(0);">当前第<span style="color:red;">{$page.pageNo}</span>页</a></li>
+                <li><a href="javascript:turnPage({$page.pageNo},2,1);" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                <li><a href="javascript:turnPage(1,2);">1</a></li>
+                <li><a href="javascript:turnPage(2,2);">2</a></li>
+                <li><a href="javascript:turnPage(3,2);">3</a></li>
+                <li><a href="javascript:turnPage(4,2);">4</a></li>
+                <li><a href="javascript:turnPage(5,2);">5</a></li>
+                <li><a href="javascript:turnPage({$page.pageNo},2,2);" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                <li><a href="javascript:void(0);">共<span style="color:red;">{$page.total}</span>条记录</a></li>
+           	</ul>
+		</div>
+	</body>
+</html>
