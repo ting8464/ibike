@@ -15,8 +15,36 @@
 				$("#rbStartPosition").val("{$rbStartPosition}");
 				$("#rbStartTime").val("{$rbStartTime}");
 				$("#uAccount").val("{$uAccount}");
+				
+				$("#rbEndTime").val(getNowFormatDate());
+				
 			});
-			
+			/**
+			*获取当前时间
+			*/
+			function getNowFormatDate() { 
+			    var date = new Date(); 
+			    var seperator1 = "-"; 
+			    var seperator2 = ":"; 
+			    var month = date.getMonth() + 1; 
+			    var strDate = date.getDate(); 
+			    if (month >= 1 && month <= 9) { 
+			        month = "0" + month; 
+			    } 
+			    if (strDate >= 0 && strDate <= 9) { 
+			        strDate = "0" + strDate; 
+			    } 
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate 
+			            + " " + date.getHours() + seperator2 + date.getMinutes() 
+			            + seperator2 + date.getSeconds(); 
+			    return currentdate; 
+			} 
+			/**
+			*输入当前时间
+			*/
+			function getTime(){
+				$("#rbEndTime").val(getNowFormatDate());
+			}
 			//跳转页面，type=0表示按值跳转，type=1表示向前跳转，type=2表示向后跳转
 			function turnPage(pageNo,pageSize,type=0){
 				if(type == 2){
@@ -31,7 +59,10 @@
 					window.location.href="{$BASEPATH}index.php/Home/Bike/rentBike?pageNo="+pageNo;
 				}
 			}
-			function mark(){
+			/**
+			*结束租车
+			*/
+			function endRent(){
 				var hid = $("#mytable input:checked");
 				if(hid.length == 0){
 					alert("对不起，请先选择一行进行编辑！！！");
@@ -42,7 +73,7 @@
 					selectedBike[i] = hid.eq(i).val();
 				}
 				$("#selectedBike").val(selectedBike);
-				$("#changeBikeState").submit();
+				$("#endRent").submit();
 			}
 		</script>
 	</head>
@@ -79,8 +110,28 @@
 					<input type="reset" value="重置"/>
 				</form>
 			</div>
-			<button type="button" onclick="addOrUpdateHouse(0)" class="btn btn-sm-info"><span class="glyphicon glyphicon-floppy-save"></span>导出Excel</button>
-			<button type="button" onclick="addOrUpdateHouse(1)" class="btn btn-sm-info"><span class="glyphicon glyphicon-saved"></span>结束行程</button>
+			<form id="endRent" action="{$BASEPATH}index.php/Home/Bike/endRent">
+				<span>结束行程：</span>
+				<input type="hidden" name="selectedBike" id="selectedBike"/>
+				<span>
+					<label>租车结束时间：</label>
+					<input type="text" name="rbEndTime" id="rbEndTime"/>
+				</span>
+				&nbsp;&nbsp;
+				<span>
+					<label>租车结束平台:</label>
+					<select id="rbEndPosition" name="rbEndPosition">
+						<option value="">请选择租车结束平台</option>
+						<volist name="pPosition" id="p1">
+							<option value="{$p1.pid}">{$p1.pposition}</option>
+						</volist>
+					</select>
+				</span>
+				<input type="button" onclick="endRent();" value="确认"/>
+				<input type="reset" value="重置"/>
+				<input type="button" onclick="getTime();" value="获取当前时间"/>
+			</form>
+			<button type="button" onclick="" class="btn btn-sm-info"><span class="glyphicon glyphicon-floppy-save"></span>导出Excel</button>
 		</div>
 		<table id="mytable" class ="table table-hover table-bordered table-striped" style = "width: 98%;margin:1%">
 			<tr>
