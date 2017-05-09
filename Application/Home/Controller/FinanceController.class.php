@@ -15,6 +15,14 @@ class FinanceController extends Controller{
         $this->chargeModel = new Model('tb_rechargerecord');
     }
     
+    /**
+     * 充值一览
+     * @param number $pageNo
+     * @param number $pageSize
+     * @param unknown $uAccount
+     * @param unknown $rmoney
+     * @param unknown $rTime
+     */
     public function rechargeList($pageNo = 1,$pageSize = 10,$uAccount = null,$rmoney = null,$rTime = null){
         $con = array();
         if($uAccount != null && $uAccount != ""){
@@ -53,6 +61,60 @@ class FinanceController extends Controller{
 //         print_r($page);
         $this->display("rechargeList");
     }
+    
+    
+    public function pledgeList($pageNo=1,$pageSize=10,$uAccount=null,$upledge=null,$uisbackpledge=null,$ptime=null){
+        $con = array();
+        if($uAccount != null && $uAccount != ""){
+            $con["u1.uAccount"] = array("like","%$uAccount%");
+        };
+        if($upledge != null && $upledge != ""){
+            $con["u1.upledge"] = array("EQ",$upledge);
+        };
+        if($uisbackpledge != null && $uisbackpledge != ""){
+            $con["u1.uisbackpledge"] = array("EQ",$uisbackpledge);
+        };
+        if($ptime != null && $ptime != ""){
+            $con["p1.ptime"] = array("GT",$ptime);
+        };
+        
+        $total = $this->chargeModel->table('tb_user')->count();
+        
+        $rows = $this->chargeModel->field('u1.uid,u1.uaccount,u1.uPledge,u1.uIsBackPledge,(select p1.ptime from
+            tb_pledgeBackRecord p1 where u1.uid = p1.uid) as ptime')->table('tb_user u1')->page($pageNo,$pageSize)
+            ->where($con)->select();
+        
+        $page = array("total"=>$total, "rows"=>$rows, "pageNo"=>$pageNo, "pageSize"=>$pageSize);
+        
+        $this->assign("page",$page);
+
+        $this->assign("uAccount",$uAccount);
+
+        $this->assign("upledge",$upledge);
+
+        $this->assign("uisbackpledge",$uisbackpledge);
+
+        $this->assign("ptime",$ptime);
+
+        $this->assign("BASEPATH",BASEPATH);
+//         print_r($page);
+        $this->display("pledgeList");
+        
+    }
+    
+    public function checkPledge($selectedUser){
+        $hasBack = $this->chargeModel->table("tb_user")->field('uid')->
+        where("uisbackpledge = 1 and uid in ($selectedUser)")->select();
+        echo json_encode($hasBack);
+    }
+    
+    public function backPledge($selectedUser){
+        
+        
+    }
+    
+    
+    
     
     
     
