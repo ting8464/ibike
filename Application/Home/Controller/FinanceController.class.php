@@ -3,7 +3,7 @@ namespace Home\Controller;
 
 use Think\Controller;
 use Think\Model;
-class RechargeController extends Controller{
+class FinanceController extends Controller{
     
     private $chargeModel;
     
@@ -27,9 +27,8 @@ class RechargeController extends Controller{
             $con["r1.rTime"] = array("GT","$rTime");
         };
         
-//         $sum = $this->chargeModel->table('tb_rechargerecord r1, tb_user u1')->where('r1.uid=u1.uid')->
-//         where($con)->sum("r1.rmoney");
-//         echo $sum;
+        $sum = $this->chargeModel->table('tb_rechargerecord r1, tb_user u1')->where('r1.uid=u1.uid')->
+        where($con)->sum("r1.rmoney");
         
         $total = $this->chargeModel->table('tb_rechargerecord r1, tb_user u1')->where('r1.uid=u1.uid')->
         where($con)->count();
@@ -48,11 +47,11 @@ class RechargeController extends Controller{
 
         $this->assign("rTime",$rTime);
 
-//         $this->assign("sum",$sum);
+        $this->assign("sum",$sum);
         
         $this->assign("BASEPATH",BASEPATH);
 //         print_r($page);
-//         $this->display("rechargeList");
+        $this->display("rechargeList");
     }
     
     
