@@ -45,7 +45,10 @@
 				$("#selectedUser").val(selectedUser);
 				
 				$.post("{$BASEPATH}index.php/Home/Finance/checkPledge",$("#backPledge").serialize(),function(data){
-					alert(data.length);
+					
+					if(data.length == 0){
+						
+					}
 				},"json");
 				
 				//$("#backPledge").submit();
