@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>展示平台加盟活动页面</title>
+		<link rel="stylesheet" href="{$BASEPATH}Public/bootstrap/css/bootstrap.css" />
+		<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/bootstrap.min.js" ></script>
+		<style type="text/css"></style>
+		<script type="text/javascript">
+		/*
+		 *点击分页处理函数
+		 */
+		function turnpage(pageNo,pageSize,type){
+			if(type == -1){
+				pageNo = pageNo-1;
+				if(pageNo == 0){
+					alert("已经是第一页了");
+					return;
+				}
+			}else if(type == 0){
+				pageNo = pageNo+1;
+				var a=parseInt({$Platforms.total} / pageSize);
+				var b=parseInt({$Platforms.total} % pageSize);
+				if(b > 0){
+					a +=1;
+				}
+				if(pageNo > a){
+					alert("已经是最后一页了");
+					return;
+				}
+				
+			}else{
+				pageNo = type;
+				
+			}
+			location.href="{$BASEPATH}index.php/Home//?pageNo="+pageNo+"&pageSize="+pageSize;
+		}
+		</script>
+	</head>
+	<body>
+		<table class="table table-striped table-bordered table-condensed">
+			<tr>
+				<th><input type="checkbox" name=""/></th>
+				<th>编号</th>
+				<th>加盟方式</th>
+				<th>加盟优惠</th>
+				<th>活动开始时间</th>
+				<th>活动结束时间</th>
+			</tr>
+			<foreach name="Platforms.rows" item="p">
+				<tr>
+					<td><input type="checkbox" name="pId" value="{$p.pid}"/></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td></td>
+				</tr>
+			</foreach>
+		</table>
+		<nav aria-label="Page navigation" class="text-center">
+			<ul class="pagination">
+				<li><a href="javascript:return false;">当前显示第<span style="color:red;">{$Platforms.pageNo}</span>页</a></li>
+			    <li>
+			      	<a href="javascript:turnpage({$Platforms.pageNo},{$Platforms.pageSize},-1);" aria-label="Previous">
+			        	<span aria-hidden="true">&laquo;</span>
+			      	</a>
+			    </li>
+			    <li><a href="javascript:turnpage({$Platforms.pageNo},{$Platforms.pageSize},1);">1</a></li>
+			    <li><a href="javascript:turnpage({$Platforms.pageNo},{$Platforms.pageSize},2);">2</a></li>
+			    <li><a href="javascript:turnpage({$Platforms.pageNo},{$Platforms.pageSize},3);">3</a></li>
+			    <li><a href="javascript:turnpage({$Platforms.pageNo},{$Platforms.pageSize},4);">4</a></li>
+			    <li><a href="javascript:turnpage({$Platforms.pageNo},{$Platforms.pageSize},5);">5</a></li>
+			    <li>
+			      	<a href="javascript:turnpage({$Platforms.pageNo},{$Platforms.pageSize},0);" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			      	</a>
+			    </li>
+			    <li><a href="javascript:return false;">共<span style="color:red;">{$Platforms.total}</span>条数据</a></li>
+			</ul>
+		</nav>
+	</body>
+</html>

@@ -1,0 +1,666 @@
+[ 2017-05-10T13:33:09+08:00 ] ::1 /ibike/index.php/Home/Statistics/loadStatisticalData
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.008000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007001s ]
+SQL: SHOW COLUMNS FROM `tb_bike` [ RunTime:0.0130s ]
+SQL: SHOW COLUMNS FROM `tb_bike` [ RunTime:0.0100s ]
+SQL: SELECT DISTINCT  COUNT(*) AS tp_count FROM tb_bike as b left JOIN tb_platform as p on b.bsetposition=p.pid  GROUP BY b.bsetposition LIMIT 1   [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `tb_bike` [ RunTime:0.0190s ]
+SQL: SELECT b.bid,(select count(*) from tb_bike b where b.bsetposition=p.pid) as allBike,(select count(*) from tb_bike b where bisused=1 and b.bsetposition=p.pid) as isuse,(select count(*) from tb_bike b where bisused=0 and b.bsetposition=p.pid) as NoUse,(select count(*) from tb_bike b where bstate=0 and b.bsetposition=p.pid) as goodBike,(select count(*) from tb_bike b where bstate=1 and b.bsetposition=p.pid) as badBike,(select count(*) from tb_bike b where bstate=2 and b.bsetposition=p.pid) as scrapBike,p.pposition FROM tb_bike as b INNER JOIN tb_platform as p on b.bsetposition=p.pid  GROUP BY p.pposition ORDER BY b.bid desc LIMIT 0,10   [ RunTime:0.0040s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.005001s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.009001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.171010s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.175010s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007001s ]
+
+[ 2017-05-10T13:33:13+08:00 ] ::1 /ibike/index.php/Home/Statistics/loadStatisticalData
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008001s ]
+SQL: SHOW COLUMNS FROM `tb_bike` [ RunTime:0.0070s ]
+SQL: SHOW COLUMNS FROM `tb_bike` [ RunTime:0.0140s ]
+SQL: SELECT DISTINCT  COUNT(*) AS tp_count FROM tb_bike as b left JOIN tb_platform as p on b.bsetposition=p.pid  GROUP BY b.bsetposition LIMIT 1   [ RunTime:0.0020s ]
+SQL: SHOW COLUMNS FROM `tb_bike` [ RunTime:0.0050s ]
+SQL: SELECT b.bid,(select count(*) from tb_bike b where b.bsetposition=p.pid) as allBike,(select count(*) from tb_bike b where bisused=1 and b.bsetposition=p.pid) as isuse,(select count(*) from tb_bike b where bisused=0 and b.bsetposition=p.pid) as NoUse,(select count(*) from tb_bike b where bstate=0 and b.bsetposition=p.pid) as goodBike,(select count(*) from tb_bike b where bstate=1 and b.bsetposition=p.pid) as badBike,(select count(*) from tb_bike b where bstate=2 and b.bsetposition=p.pid) as scrapBike,p.pposition FROM tb_bike as b INNER JOIN tb_platform as p on b.bsetposition=p.pid  GROUP BY p.pposition ORDER BY b.bid desc LIMIT 0,10   [ RunTime:0.0020s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.002000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.005000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.144008s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.148008s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007000s ]
+
+[ 2017-05-10T13:34:53+08:00 ] ::1 /ibike/index.php/Home/Activity/addActivity.html
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006001s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.005000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.049003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.053003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.008001s ]
+NOTIC: [2] Cannot modify header information - headers already sent by (output started at D:\PHP-webapp\ibike\ThinkPHP\Library\Think\App.class.php:124) D:\PHP-webapp\ibike\ThinkPHP\Library\Think\View.class.php 第 91 行.
+NOTIC: [2] Cannot modify header information - headers already sent by (output started at D:\PHP-webapp\ibike\ThinkPHP\Library\Think\App.class.php:124) D:\PHP-webapp\ibike\ThinkPHP\Library\Think\View.class.php 第 92 行.
+NOTIC: [2] Cannot modify header information - headers already sent by (output started at D:\PHP-webapp\ibike\ThinkPHP\Library\Think\App.class.php:124) D:\PHP-webapp\ibike\ThinkPHP\Library\Think\View.class.php 第 93 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006001s ]
+
+[ 2017-05-10T14:13:52+08:00 ] ::1 /ibike/index.php/Home/Platform/addPlatform
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006001s ]
+SQL: SHOW COLUMNS FROM `tb_platform` [ RunTime:0.0060s ]
+SQL: INSERT INTO `tb_platform` (`pPosition`,`pIsUsed`) VALUES ('大渡口','1') [ RunTime:0.0050s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007001s ]
+
+[ 2017-05-10T14:49:19+08:00 ] ::1 /ibike/index.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.011001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.016001s ]
+INFO: [ view_parse ] --START--
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.019001s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.026002s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007001s ]
+
+[ 2017-05-10T14:56:06+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0050s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007000s ]
+
+[ 2017-05-10T14:56:27+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007000s ]
+
+[ 2017-05-10T14:57:55+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006001s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0050s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006000s ]
+
+[ 2017-05-10T14:59:25+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006001s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0050s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007000s ]
+
+[ 2017-05-10T15:01:42+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.007000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.005000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.011001s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006000s ]
+
+[ 2017-05-10T15:17:15+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006001s ]
+
+[ 2017-05-10T15:18:14+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0070s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006001s ]
+
+[ 2017-05-10T15:43:39+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.007000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('微博加盟','2017-5-10','2017-5-15','  打折九折只要9999') [ RunTime:0.0130s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.004000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.008001s ]
+
+[ 2017-05-10T16:09:55+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('微博加盟','2017-5-10','2017-5-15','  打折九折只要9999') [ RunTime:0.0130s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.003000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.008001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.064004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.069004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.004001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.008001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.009001s ]
+
+[ 2017-05-10T16:11:21+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007001s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('微博加盟','2017-5-10','2017-5-15','  打折九折只要9999') [ RunTime:0.0180s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.002001s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.005001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.049003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.052003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007000s ]
+
+[ 2017-05-10T16:11:35+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('微博加盟','2017-5-10','2017-5-15','  打折九折只要99') [ RunTime:0.0130s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.002000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.008000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.059003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.063004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.009001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006000s ]
+
+[ 2017-05-10T16:13:15+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007001s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('微博加盟','2017-5-10','2017-5-15','  打折九折只要99') [ RunTime:0.0160s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.005000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.050003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.055003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.004000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.008000s ]
+
+[ 2017-05-10T16:13:18+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.008000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('微博加盟','2017-5-10','2017-5-15','  打折九折只要99') [ RunTime:0.0050s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.002000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.006001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.065003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.069004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007001s ]
+
+[ 2017-05-10T16:13:45+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0050s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('入股','2017-5-11','2017-5-20','分红') [ RunTime:0.0170s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.005000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.057004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.060004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.009000s ]
+
+[ 2017-05-10T16:16:04+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.008000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('入股','2017-5-11','2017-5-20','分红') [ RunTime:0.0040s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.002000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.006000s ]
+NOTIC: [8] Undefined variable: hint D:\PHP-webapp\ibike\Application\Runtime\Cache\Home\6f9389c3fdb0e05886ae39ce9ae48270.php 第 18 行.
+NOTIC: [8] Undefined variable: hint D:\PHP-webapp\ibike\Application\Runtime\Cache\Home\6f9389c3fdb0e05886ae39ce9ae48270.php 第 19 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.070004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.073004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.007000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.004001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.009001s ]
+
+[ 2017-05-10T16:16:39+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.007000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006001s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0050s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('投资','2017-5-11','2017-5-20','分钱') [ RunTime:0.0150s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.006000s ]
+NOTIC: [8] Undefined variable: hint D:\PHP-webapp\ibike\Application\Runtime\Cache\Home\6f9389c3fdb0e05886ae39ce9ae48270.php 第 18 行.
+NOTIC: [8] Undefined variable: hint D:\PHP-webapp\ibike\Application\Runtime\Cache\Home\6f9389c3fdb0e05886ae39ce9ae48270.php 第 19 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.065004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.072004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.004000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.011001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007001s ]
+
+[ 2017-05-10T16:18:53+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('投资','2017-5-11','2017-5-20','分钱') [ RunTime:0.0150s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.006000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.010001s ]
+
+[ 2017-05-10T16:19:04+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.009001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('投资','2017-5-11','2017-5-20','分钱') [ RunTime:0.0120s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006001s ]
+
+[ 2017-05-10T16:20:06+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.009001s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('入股','2017-5-11','2017-5-20','分红') [ RunTime:0.0220s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.005001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.062003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.066004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.007000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006001s ]
+
+[ 2017-05-10T16:20:12+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.006000s ]
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('投资发给','2017-5-11','2017-5-20','分钱') [ RunTime:0.0150s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001001s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.005001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.062003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.065004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.008000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.008001s ]
+
+[ 2017-05-10T16:23:50+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.004000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007000s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\PHP-webapp\ibike\Application\Home\Controller\ActivityController.class.php 第 4 行.
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('投资发给','2017-5-11','2017-5-20','分钱') [ RunTime:0.0130s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.002000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.006000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.062003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.064004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003001s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.007001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007000s ]
+
+[ 2017-05-10T16:26:04+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008001s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\PHP-webapp\ibike\Application\Home\Controller\ActivityController.class.php 第 4 行.
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('投资发给','2017-5-11','2017-5-20','分钱') [ RunTime:0.0060s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.002000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.005000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.069004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.073004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.007000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.004000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.008000s ]
+
+[ 2017-05-10T16:36:21+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.007000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007001s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\PHP-webapp\ibike\Application\Home\Controller\ActivityController.class.php 第 4 行.
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('投资发给','2017-5-11','2017-5-20','分钱') [ RunTime:0.0030s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.002000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.008001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.058003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.061003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003001s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007001s ]
+
+[ 2017-05-10T16:39:46+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.009001s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\PHP-webapp\ibike\Application\Home\Controller\ActivityController.class.php 第 4 行.
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('入股','2017-5-11','2017-5-20','分红') [ RunTime:0.0120s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.001000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.005001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.056003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.060003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.007000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.007001s ]
+
+[ 2017-05-10T16:41:08+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.006001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.006000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.010001s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\PHP-webapp\ibike\Application\Home\Controller\ActivityController.class.php 第 4 行.
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0060s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('入股','2017-5-11','2017-5-20','分红') [ RunTime:0.0130s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.002001s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.005001s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.055003s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.059004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.006000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.002000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.006001s ]
+
+[ 2017-05-10T16:41:26+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001001s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005001s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008001s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\PHP-webapp\ibike\Application\Home\Controller\ActivityController.class.php 第 4 行.
+SQL: SHOW COLUMNS FROM `tb_terraceactivi` [ RunTime:0.0070s ]
+NOTIC: [8] Undefined index: validate D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1185 行.
+NOTIC: [8] Undefined index: auto D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Model.class.php 第 1128 行.
+SQL: INSERT INTO `tb_terraceactivi` (`tname`,`tstarttime`,`tendtime`,`tcontent`) VALUES ('入股','2017-5-11','2017-5-20','分红') [ RunTime:0.0130s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.003000s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.007000s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.061004s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.065004s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.002000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.008001s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.003000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.009000s ]
+
+[ 2017-05-10T17:44:15+08:00 ] ::1 /ibike/index.php/Home/Activity/addPlatformActivity
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.005000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.008001s ]
+NOTIC: [8] A session had already been started - ignoring session_start() D:\PHP-webapp\ibike\Application\Home\Controller\ActivityController.class.php 第 4 行.
+ERR: SQLSTATE[HY000] [2002] �������ӷ���һ��ʱ���û����ȷ�𸴻����ӵ�����û�з�Ӧ�����ӳ���ʧ�ܡ�
+
+NOTIC: [2] Cannot modify header information - headers already sent by (output started at D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Db\Driver.class.php:103) D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Think.class.php 第 229 行.
+NOTIC: [2] Cannot modify header information - headers already sent by (output started at D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Db\Driver.class.php:103) D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Think.class.php 第 230 行.
+
+[ 2017-05-10T17:44:15+08:00 ] ::1 /ibike/index.php
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.002000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.011000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.007001s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.013001s ]
+INFO: [ view_parse ] --START--
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.008000s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.018001s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.007000s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.006000s ]
+INFO: [ app_end ] --END-- [ RunTime:0.019002s ]
+

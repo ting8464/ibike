@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>统计管理</title>
+	<link rel="stylesheet" href="{$BASEPATH}Public/bootstrap/css/bootstrap.min.css" />
+	<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		/*
+		 *点击分页处理函数
+		 */
+		function turnpage(pageNo,pageSize,type){
+			if(type == -1){
+				pageNo = pageNo-1;
+				if(pageNo == 0){
+					alert("已经是第一页了");
+					return;
+				}
+			}else if(type == 0){
+				pageNo = pageNo+1;
+				var a=parseInt({$data.total} / pageSize);
+				var b=parseInt({$data.total} % pageSize);
+				if(b > 0){
+					a +=1;
+				}
+				if(pageNo > a){
+					alert("已经是最后一页了");
+					return;
+				}
+				
+			}else{
+				pageNo = type;
+				
+			}
+			location.href="{$BASEPATH}index.php/Home/Statistics/loadStatisticalData?pageNo="+pageNo+"&pageSize="+pageSize;
+		}
+	</script>
+</head>
+<body>
+	<form action="{$BASEPATH}index.php/Home/Statistics/searchPlatform" method="post">
+		<input type="text" id="search" name="pPosition" class="boder" placeholder="按平台收索">
+		<button type="submit"><span class="glyphicon glyphicon-search"></span>收索</button>
+	</form>
+	<table class="table table-striped table-bordered table-condensed" style="margin: 5px">
+			<tr>
+				<th>平台</th>
+				<th>该平台拥有车辆数</th>
+				<th>该平台正在使用车辆数</th>
+				<th>该平台暂时没有使用车辆数</th>
+				<th>该平台完好无损车辆数</th>
+				<th>该平台已损坏的车辆数</th>
+				<th>该平台完全报废的车辆数</th>
+			</tr>
+			<volist name="data.rows" id="p">
+				<tr>
+					<td>{$p.pposition}</td>
+					<td>{$p.allbike}</td>
+					<td>{$p.isuse}</td>
+					<td>{$p.nouse}</td>
+					<td>{$p.goodbike}</td>
+					<td>{$p.badbike}</td>
+					<td>{$p.scrapbike}</td>
+				</tr>
+			</volist>
+		</table>
+		<nav aria-label="Page navigation" class="text-center">
+			<ul class="pagination">
+				<li><a href="javascript:return false;">当前显示第<span style="color:red;">{$data.pageNo}</span>页</a></li>
+			    <li>
+			      	<a href="javascript:turnpage({$data.pageNo},{$data.pageSize},-1);" aria-label="Previous">
+			        	<span aria-hidden="true">&laquo;</span>
+			      	</a>
+			    </li>
+			    <li><a href="javascript:turnpage({$data.pageNo},{$data.pageSize},1)">1</a></li>
+			    <li><a href="javascript:turnpage({$data.pageNo},{$data.pageSize},2);">2</a></li>
+			    <li><a href="javascript:turnpage({$data.pageNo},{$data.pageSize},3);">3</a></li>
+			    <li><a href="javascript:turnpage({$data.pageNo},{$data.pageSize},4);">4</a></li>
+			    <li><a href="javascript:turnpage({$data.pageNo},{$data.pageSize},5);">5</a></li>
+			    <li>
+			      	<a href="javascript:turnpage({$data.pageNo},{$data.pageSize},0);" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			      	</a>
+			    </li>
+			    <li><a href="javascript:return false;">共<span style="color:red;">{$data.total}</span>条数据</a></li>
+			</ul>
+		</nav>
+</body>
+</html>

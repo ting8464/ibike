@@ -1,0 +1,12 @@
+[ 2017-05-06T17:28:36+08:00 ] ::1 /ibike/index.php/Home/Manager/login
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.001000s ]
+INFO: [ app_init ] --END-- [ RunTime:0.008000s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.003000s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.007000s ]
+ERR: SQLSTATE[HY000] [2002] ÏòÒ»¸öÎÞ·¨Á¬½ÓµÄÍøÂç³¢ÊÔÁËÒ»¸öÌ×½Ó×Ö²Ù×÷¡£
+
+NOTIC: [2] Cannot modify header information - headers already sent by (output started at D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Db\Driver.class.php:103) D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Think.class.php ç¬¬ 229 è¡Œ.
+NOTIC: [2] Cannot modify header information - headers already sent by (output started at D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Db\Driver.class.php:103) D:\PHP-webapp\ibike\ThinkPHP\Library\Think\Think.class.php ç¬¬ 230 è¡Œ.
+
