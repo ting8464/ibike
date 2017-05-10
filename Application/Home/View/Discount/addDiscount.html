@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>优惠券一览</title>
+		<link rel="stylesheet" href="http://localhost:8080/ibike/Public/bootstrap/css/bootstrap.css" />
+		<script type="text/javascript" src="http://localhost:8080/ibike/Public/bootstrap/js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="http://localhost:8080/ibike/Public/bootstrap/js/bootstrap.min.js" ></script>
+		
+		<script type="text/javascript">
+			function addDiscount(){
+				$.post("http://localhost:8080/ibike/index.php/Home/Discount/addDiscount",$("#myform").serialize(),function(data){
+					if(data > 0){
+						alert("添加优惠券成功！！！");
+					}else{
+						alert("添加优惠券失败！！！");
+					}
+               	},"json");
+			}
+		</script>
+	</head>
+	<body>
+		<div style="margin-top:50px;" class="col-md-4 col-md-offset-4">
+			<div class="panel panel-primary">
+				<div class="panel-heading">添加优惠券</div>
+				<div class="panel-body">
+					<form id="myform">
+						<div class = "form-group form-inline">
+			           		<label for="dCount2" style="width:40%">优惠券详细信息：</label>
+			           		<input type="text" id="dCount2" name="dCount" style="width:58%"/> 
+						</div>
+			           	<div class = "form-group form-inline">
+			           		<label for="dLimit2" style="width:40%">优惠券限制充值金额：</label>
+			           		<input type="text" id="dLimit2" name="dLimit" style="width:58%"/> 		
+			           	</div>
+			           	<div class = "form-group form-inline">
+			           		<label for="dGive2" style="width:40%">优惠券赠送金额：</label>
+			           		<input type="text" id="dGive2" name="dGive" style="width:58%" /> 		
+			           	</div>
+			           	<div style="margin:auto;text-align:center;">
+					        <button type="button" onclick="addDiscount();" class="btn btn-primary">确认</button>
+					        <button type="reset" class="btn btn-default">取消</button>
+			           	</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

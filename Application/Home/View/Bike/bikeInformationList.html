@@ -31,36 +31,6 @@
 					window.location.href="{$BASEPATH}index.php/Home/Bike/loadBikeByPage?pageNo="+pageNo;
 				}
 			}
-			function addOrUpdateHouse(type){
-				$("#cancel").click();
-				if(type == 0){
-					$("#hId").val(-1);
-					$("#openWin").click();
-				}else{
-					hid = $("#mytable input:checked");
-					if(hid.length == 0){
-						alert("对不起，请先选择一行进行编辑！！！");
-						return;
-					}
-					if(hid.length > 1){
-						alert("对不起，您只能选择一行进行编辑！！！");
-						return;
-					}
-					if (confirm("你确定修改吗？")) {
-						var hid = hid.eq(0).val();
-						$("#hId").val(hid);
-	        			$.post("<?php echo URLROOT?>/index.php/Home/User/loadPickHouse?hId="+hid,function(data){
-	        				$("#hArea").val(data["harea"]);
-		        			$("#hDevelop").val(data["hdevelop"]);
-		        			$("#hPrice").val(data["hprice"]);
-		        			$("#hSort").val(data["hsort"]);
-		        			$("#hMore").val(data["hmore"]);
-	                   	},"json");
-						$("#openWin").click();
-			        }
-				}
-			}
-			
 			function mark(){
 				var hid = $("#mytable input:checked");
 				if(hid.length == 0){
@@ -128,7 +98,6 @@
 					<button type="button" onclick="mark();">确认</button>
 				</form>
 			</div>
-			<button style="display:none;" "button" data-toggle="modal" data-target="#myModal" id="openWin">
 			<button type="button" onclick="addOrUpdateHouse(0)" class="btn btn-sm-info"><span class="glyphicon glyphicon-plus"></span>新增</button>
 			<button type="button" onclick="addOrUpdateHouse(1)" class="btn btn-sm-info"><span class="glyphicon glyphicon-pencil"></span>修改</button>
 			<button type="button" class="btn btn-sm-info"><span class="glyphicon glyphicon-trash"></span>删除</button>
@@ -177,33 +146,5 @@
                 <li><a href="javascript:void(0);">共<span style="color:red;">{$page.total}</span>条记录</a></li>
            	</ul>
 		</div>
-		<div class="modal fade" tabindex="-1" id="myModal" role="dialog">
-			<div class="modal-dialog" role="document">
-			    <div class="modal-content">
-			    	<div class="modal-header">
-				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				        <h4 class="modal-title">修改单车信息</h4>
-			    	</div>
-			        <form id="myform" method="post" action="{$BASEPATH}index.php/Home/Bike/addOrUpdateHouse">
-				    	<div class="modal-body">
-				    		<input type="hidden" id = "bId" name = "bId" value=""/>
-			            	<br/>
-			            	<div style="width:100%; text-align:center;" class="form-group">
-			            		<label for="hArea">单车车况：</label>
-			            		<select name = "bState">
-			            			<option value=0>正常</option>
-			            			<option value=1>损坏</option>
-			            			<option value=2>报废</option>
-			            		</select>  		
-			            	</div>
-				    	</div>
-				    	<div class="modal-footer">
-					        <button type="submit" class="btn btn-primary">确认</button>
-					        <button type="reset" id="cancel" class="btn btn-default" data-dismiss="modal">取消</button>
-				    	</div>
-				    </form>
-			    </div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
 	</body>
 </html>

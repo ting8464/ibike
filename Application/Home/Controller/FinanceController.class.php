@@ -62,7 +62,9 @@ class FinanceController extends Controller{
         $this->display("rechargeList");
     }
     
-    
+    /**
+     * 押金一览
+     */
     public function pledgeList($pageNo=1,$pageSize=10,$uAccount=null,$upledge=null,$uisbackpledge=null,$ptime=null){
         $con = array();
         if($uAccount != null && $uAccount != ""){
@@ -101,16 +103,58 @@ class FinanceController extends Controller{
         $this->display("pledgeList");
         
     }
-    
-    public function checkPledge($selectedUser){
+    /**
+     * 检查选中用户是否符合修改条件
+     * @param unknown $selectedUser
+     */
+    public function checkPledge($selectedUser = null){
         $hasBack = $this->chargeModel->table("tb_user")->field('uid')->
         where("uisbackpledge = 1 and uid in ($selectedUser)")->select();
         echo json_encode($hasBack);
     }
-    
-    public function backPledge($selectedUser){
+    /**
+     * 修改退回押金
+     * @param unknown $selectedUser
+     * @param unknown $ptime2
+     */
+    public function backPledge($selectedUser=null,$ptime2=null){
         
+        $selectedUserArray = explode(',',$selectedUser);
         
+        //在模型中启动事务
+        $this->chargeModel->startTrans();
+        
+        $a=0;
+        $b=0;
+        
+        $updateData['uisbackpledge'] = 0;
+        
+        $insertData['ptime'] = $ptime2;
+        
+        foreach ($selectedUserArray as $temp){
+            
+            $insertData['uid'] = $temp;
+            $insertResult = $this->chargeModel->table("tb_pledgebackrecord")->field('uid,ptime')->add($insertData);
+            if($insertResult > 0){
+                $a++;
+            }
+
+//             $updateResult = $this->chargeModel->table('tb_user')->where("uid = $temp")->save($updateData);
+            $sql = "update tb_user set uisbackpledge=1 where uid=$temp";
+            $updateResult = $this->chargeModel->execute($sql);
+            if($updateResult > 0){
+                $b++;
+            }
+        }
+        
+        if ($a == $b){
+            // 提交事务
+            $this->chargeModel->commit();
+        }else{
+            // 事务回滚
+            $this->chargeModel->rollback();
+        }
+        $this->pledgeList();
     }
     
     

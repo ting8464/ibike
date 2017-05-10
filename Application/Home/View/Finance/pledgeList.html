@@ -30,6 +30,26 @@
 					window.location.href="{$BASEPATH}index.php/Home/Finance/pledgeList?pageNo="+pageNo;
 				}
 			}
+			/**
+			*获取当前时间
+			*/
+			function getNowFormatDate() { 
+			    var date = new Date(); 
+			    var seperator1 = "-"; 
+			    var seperator2 = ":"; 
+			    var month = date.getMonth() + 1; 
+			    var strDate = date.getDate(); 
+			    if (month >= 1 && month <= 9) { 
+			        month = "0" + month; 
+			    } 
+			    if (strDate >= 0 && strDate <= 9) { 
+			        strDate = "0" + strDate; 
+			    } 
+			    var currentdate = date.getFullYear() + seperator1 + month + seperator1 + strDate 
+			            + " " + date.getHours() + seperator2 + date.getMinutes() 
+			            + seperator2 + date.getSeconds(); 
+			    return currentdate; 
+			} 
 			//批量退回押金
 			function backpledge(){
 				var hid = $("#mytable input:checked");
@@ -40,18 +60,20 @@
 				
 				var selectedUser = Array();
 				for(var i = 0; i<hid.length; i++){
-					selectedUser[i] = hid.eq(i).val();
+					if(hid.eq(i).val() != null && hid.eq(i).val() != ""){
+						selectedUser.push(hid.eq(i).val());
+					}
 				}
 				$("#selectedUser").val(selectedUser);
 				
 				$.post("{$BASEPATH}index.php/Home/Finance/checkPledge",$("#backPledge").serialize(),function(data){
-					
-					if(data.length == 0){
-						
+					if(data.length > 0){
+						alert("对不起！你选中的用户存在已退还押金，请重新选择！");
+						return;
 					}
+					$("#ptime2").val(getNowFormatDate());
+					$("#backPledge").submit();
 				},"json");
-				
-				//$("#backPledge").submit();
 			}
 		</script>
 	</head>
@@ -93,7 +115,8 @@
 			</div>
 			<div style="margin-bottom:7px;">
 				<form id="backPledge" action="{$BASEPATH}index.php/Home/Finance/backPledge" method="post">
-					<input type="hidden" id="selectedUser" name="selectedUser">
+					<input type="hidden" id="selectedUser" name="selectedUser"/>
+					<input type="hidden" id="ptime2" name="ptime2"/>
 					<label>操作：</label>
 					<button type="button" onclick="backpledge();">批量退还押金</button>
 				</form>
@@ -103,7 +126,7 @@
 		</div>
 		<table id="mytable" class ="table table-hover table-bordered table-striped" style = "width: 98%;margin:1%">
 			<tr>
-				<th><input type="checkbox"/>多选框</th>
+				<th><input type="checkbox" value=""/>多选框</th>
 				<th>用户账号</th>
 				<th>是否缴纳押金</th>
 				<th>是否退还押金</th>
