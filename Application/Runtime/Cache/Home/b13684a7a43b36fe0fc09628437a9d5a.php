@@ -1,4 +1,4 @@
-
+<?php if (!defined('THINK_PATH')) exit();?>
 <!-- 用户登录或注册成功后来到的欢迎界面 -->
 <html>
 	<head>
@@ -6,11 +6,11 @@
 		<style type="text/css">
 			.left-right{float: left;}
 		</style>
-		<link rel="stylesheet" href="{$url}Public/easyui/themes/default/easyui.css"/>
-		<link rel="stylesheet" href="{$url}Public/easyui/themes/icon.css"/>
-		<script type="text/javascript" src="{$url}Public/bootstrap/js/jquery-1.9.1.min.js"></script>
-		<script type="text/javascript" src="{$url}Public/easyui/jquery.easyui.min.js"></script>
-		<script type="text/javascript" src="{$url}Public/easyui/locale/easyui-lang-zh_CN.js"></script>
+		<link rel="stylesheet" href="<?php echo ($url); ?>Public/easyui/themes/default/easyui.css"/>
+		<link rel="stylesheet" href="<?php echo ($url); ?>Public/easyui/themes/icon.css"/>
+		<script type="text/javascript" src="<?php echo ($url); ?>Public/bootstrap/js/jquery-1.9.1.min.js"></script>
+		<script type="text/javascript" src="<?php echo ($url); ?>Public/easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="<?php echo ($url); ?>Public/easyui/locale/easyui-lang-zh_CN.js"></script>
 		<script type="text/javascript">
 		 
 		function addTabs($title,$url){
@@ -26,7 +26,7 @@
 	</head>
 	<body class="easyui-layout"> 
         <div data-options="region:'north',split:true" style="height:30px;">
-        	欢迎您，{$Think.session.loginUser.turename}
+        	欢迎您，<?php echo ($_SESSION['loginUser']['turename']); ?>
         	
         	<b><a href="login.php">退出</a></b>
         	
@@ -34,32 +34,23 @@
         
         <div data-options="region:'west',title:'系统菜单',split:true" style="width:180px;">
         	<ul id="tt" class="easyui-tree">   
-        		<volist name="Think.session.menus" id="m1">
-        			<if condition="$m1.mlevel eq 1"><!--如果是二级菜单-->
+        		<?php if(is_array($_SESSION['menus'])): $i = 0; $__LIST__ = $_SESSION['menus'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$m1): $mod = ($i % 2 );++$i; if($m1["mlevel"] == 1): ?><!--如果是二级菜单-->
         				<li>
-        					<span>{$m1.mname}</span>
+        					<span><?php echo ($m1["mname"]); ?></span>
         					<ul>
-        						<assign name="mid" value="$m1.mid"/>
-	        					<volist name="Think.session.menus" id="m2">
-	        						<if condition="$m2.mlevel eq 2 AND $m2.mparentid eq $mid"><!--如果是三级菜单-->
+        						<?php $mid = $m1["mid"]; ?>
+	        					<?php if(is_array($_SESSION['menus'])): $i = 0; $__LIST__ = $_SESSION['menus'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$m2): $mod = ($i % 2 );++$i; if($m2["mlevel"] == 2 AND $m2["mparentid"] == $mid): ?><!--如果是三级菜单-->
 	        							<li>
-	        								<a href="javascript:addTabs('{$m2.mname}','{$url}{$m2.murl}')">{$m2.mname}</a>
-	        							</li>
-	        						</if>
-	        					</volist>
+	        								<a href="javascript:addTabs('<?php echo ($m2["mname"]); ?>','<?php echo ($url); echo ($m2["murl"]); ?>')"><?php echo ($m2["mname"]); ?></a>
+	        							</li><?php endif; endforeach; endif; else: echo "" ;endif; ?>
         					</ul>
-        				</li>
-        			</if>
-        		</volist>
+        				</li><?php endif; endforeach; endif; else: echo "" ;endif; ?>
 			
 <!--             	foreach ($_SESSION["menus"] as $m1){ -->
-<!--             	    if($m1["level"]==2){//如果是二级菜单 -->
-<!--                 	     "<li>"; -->
-<!--                 	     "<div class='mm' aa='0' style='cursor: pointer'>{$m1["name"]}</div>"; -->
+<!--             	    if($m1["level"]==2)</div>"; -->
 <!--                 	     "<ul style='display:none;'>"; -->
 <!--             	        foreach ($_SESSION["menus"] as $m2){ -->
-<!--                     	    if($m2["level"]==3 && $m2["parentlevel"]==$m1["mid"]){//如果是三级菜单，那么当前它父级菜单要与父级菜单级别相等 -->
-<!--                     	         "<li><a href='javascript:addTabs(\"{$m2["name"]}\",\"{$m2["url"]}\")'>{$m2["name"]}</a></li>";                            	 -->
+<!--                     	    if($m2["level"]==3 && $m2["parentlevel"]==$m1["mid"])\",\"<?php echo ($m2["url"]); ?>\")'><?php echo ($m2["name"]); ?></a></li>";                            	 -->
 <!--                     	    } -->
 <!--                     	}  -->
 <!--                     	 "</ul></li>"; -->

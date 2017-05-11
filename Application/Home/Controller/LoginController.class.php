@@ -3,7 +3,7 @@ namespace Home\Controller;
 
 use Think\Controller;
 use Think\Model;
-class UserController extends Controller{
+class LoginController extends Controller{
     private $userMode;
     
     public function __construct(){
