@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>新增公告改、删操作</title>
+		<link rel="stylesheet" href="{$BAH}Public/bootstrap/css/bootstrap.css" />
+		<script type="text/javascript" src="{$BAH}Public/bootstrap/js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="{$BAH}Public/bootstrap/js/bootstrap.min.js" ></script>
+	</head>
+	<script type="text/javascript">
+	function turnpage(pageNo,pageSize,type){
+		if(type == -1){
+			pageNo = pageNo-1;
+			if(pageNo == 0){
+				alert("已经是第一页了");
+				return;
+			}
+		}else if(type == 0){
+			pageNo = pageNo+1;
+			var a=parseInt({$page.total} / pageSize);
+			var b=parseInt({$page.total} % pageSize);
+			if(b > 0){
+				a +=1;
+			}
+			if(pageNo > a){
+				alert("已经是最后一页了");
+				return;
+			}
+			
+		}else{
+			pageNo = type;
+			
+		}
+		location.href="{$BAH}index.php/Home/Notice/updatanotice?pageNo="+pageNo+"&pageSize="+pageSize;
+	}
+	function updata(){
+		var cxs=$(".cx:checked");
+		if(cxs.length != 1){
+			alert("请选择一行数据进行操作");
+		}else{
+			$("#model").modal('toggle');
+			//$.post("{BAH}index.php/Home/Notice/loadnotice",{"nid":cxs.val()},function(data){
+				//$("#nid").val(data.nid),
+				//$("#notice").val(data.notice)
+			//},"json");
+		}
+	}
+	function deletenotice(){
+		$("#delForm")[0].submit();
+	}
+	</script>
+<body>
+	<div class="modal fade" id="model" tabindex="-1" role="dialog" >
+	  	<div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+		      	<div class="modal-header">
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        	<h4 class="modal-title">修改公告</h4>
+		      	</div>
+		      	<form id="sub" action="{$BAH}index.php/Home/Notice/loadnotice" method="post">
+			      	<input type="hidden" name="nid" id="nid"/>
+			      	<div class="modal-body">
+			       		<span>信息修改</span>
+			       		<input type="text" class="form-control" name="notice" id="notice"/>
+			      	</div>
+			      	<div class="modal-footer">
+			      		<input type="reset" class="btn-default" value="取消"/>
+			      		<input type="submit" class="btn-primary" value="确认"/>
+			      	</div>
+		      	</form>
+	    	</div><!-- /.modal-content -->
+	  	</div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<div style="width:500px;margin:auto; margin-top:10px;">
+		<button style="width:200px" type="button" class="btn btn-primary" onclick="updata();"><span class="glyphicon glyphicon-pencil"></span>修改</button>
+		<button style="width:200px" type="button" class="btn btn-primary" onclick="deletenotice();"><span class="glyphicon glyphicon-remove-sign"></span>删除</button>
+	</div>
+	<form id="delForm" action="{$BAH}index.php/Home/Notice/clientdel" method="post">
+		<table class="table table-striped table-bordered table-condensed" style="margin-top:1%;">
+			<tr>
+				<th style="width: 80px;"><input type="checkbox" /></th>
+				<th>新增公告</th>
+			</tr>
+			<foreach name="page.rows" item="u">
+				<tr>
+					<td><input type="checkbox" class="cx" name="cx[]"  value="{$u.nid}"/></td>
+					<td>{$u.notice}</td>
+				</tr>
+			</foreach>
+		</table>
+	</form>
+	<nav aria-label="Page navigation" class="text-center">
+		<ul class="pagination">
+			<li><a href="javascript:return false;">当前显示第<span style="color:red;">{$page.pageNo}</span>页</a></li>
+		    <li>
+		      	<a href="javascript:turnpage({$page.pageNo},{$page.pageSize},-1);" aria-label="Previous">
+		        	<span aria-hidden="true">&laquo;</span>
+		      	</a>
+		    </li>
+		    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},1);">1</a></li>
+		    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},2);">2</a></li>
+		    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},3);">3</a></li>
+		    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},4);">4</a></li>
+		    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},5);">5</a></li>
+		    <li>
+		      	<a href="javascript:turnpage({$page.pageNo},{$page.pageSize},0);" aria-label="Next">
+		        	<span aria-hidden="true">&raquo;</span>
+		      	</a>
+		    </li>
+		    <li><a href="javascript:return false;">共<span style="color:red;">{$page.total}</span>条数据</a></li>
+		</ul>
+	</nav>
+</body>
+</html>

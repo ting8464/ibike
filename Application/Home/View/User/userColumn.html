@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>用户一栏</title>  
+		<link rel="stylesheet" href="{$BAH}Public/bootstrap/css/bootstrap.css" />
+		<script type="text/javascript" src="{$BAH}Public/bootstrap/js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="{$BAH}Public/bootstrap/js/bootstrap.min.js" ></script>
+	</head>
+	<script type="text/javascript">
+		function turnpage(pageNo,pageSize,type){
+			if(type == -1){
+				pageNo = pageNo-1;
+				if(pageNo == 0){
+					alert("已经是第一页了");
+					return;
+				}
+			}else if(type == 0){
+				pageNo = pageNo+1;
+				var a=parseInt({$page.total} / pageSize);
+				var b=parseInt({$page.total} % pageSize);
+				if(b > 0){
+					a +=1;
+				}
+				if(pageNo > a){
+					alert("已经是最后一页了");
+					return;
+				}
+				
+			}else{
+				pageNo = type;
+				
+			}
+			location.href="{$BAH}index.php/Home/User/setClient?pageNo="+pageNo+"&pageSize="+pageSize;
+		}
+		function set(){
+			$("#dg").datagrid('loading');
+			$.post("{$BAH}index.php/Home/User/setClient",{
+				"searcheName" : $("#searcheName").val(),
+				"searcheCredit" : $("#searcheCredit").val(),
+				"searcheIntegral" : $("#searcheIntegral").val(),
+				"searcheIsFrozen" : $("#searcheIsFrozen").val(),
+				"searchePledge" : $("#searchePledge").val(),
+				"searcheState" : $("#searcheState").val(),
+			},function(data){
+				$("#dg").datagrid("loadData",{
+					rows:data.rows,
+					total:data.total
+				});
+				$("#dg").datagrid('loaded');
+			},"json");
+		}
+		//增加金额
+		function opwen1(){
+			var cbxs=$("input[name=cbx]:checked");
+			if(cbxs.length != 1){
+				alert("请选择一行数据进行操作");
+				return;
+			}
+			$("#myModal").modal('toggle');//打开模态窗
+			//$.post("",{cbx:cbxs.val()},function(data){
+				//$("#cbx").val(data.cbx);
+			//},"json");
+		}
+		//违规扣款
+		function opwen2(){
+			var cbxs=$("input[name=cbx]:checked");
+			if(cbxs.length != 1){
+				alert("请选择一行数据进行操作");
+				return;
+			}
+			$("#myModal1").modal('toggle');//打开模态窗
+		}
+		//冻结账号
+		function opwen3(){
+			var cbxs=$("input[name=cbx]:checked");
+			if(cbxs.length != 1){
+				alert("请选择一行数据进行操作");
+				return;
+			}
+			$("#myModal2").modal('toggle');//打开模态窗
+		}
+	</script>
+	<body>
+		<form action="{$BAH}index.php/Home/User/setClient" method="post"  id="dg">
+			<div style="margin:auto;">
+				<div class="input-group">
+				  	<span style="width: 155px" class="input-group-addon">按账号搜索</span>
+				  	<input type="text" style="width: 180px" class="form-control" id="searcheName" name="searcheName" />
+					<span style="width: 155px" class="input-group-addon">按积分搜索</span>
+				  	<input type="text" style="width: 180px" class="form-control" id="searcheCredit" name="searcheCredit"/>
+					<span style="width: 155px" class="input-group-addon">按信用搜索</span>
+					<select class="form-control" style="width: 180px" id="searcheIntegral" name="searcheIntegral">
+						<option value="">请选择信用程度</option>
+						<option value="0">很差</option>
+						<option value="1">较差</option>
+						<option value="2">一般</option>
+						<option value="3">良好</option>
+						<option value="4">非常好</option>
+					</select>
+				</div>
+				<div class="input-group">
+				  	<span style="width: 155px" class="input-group-addon">按冻结状态搜索</span>
+				  	<select class="form-control" style="width: 180px" id="searcheIsFrozen" name="searcheIsFrozen">
+						<option value="">请选择冻结状态</option>
+						<option value="0">否</option>
+						<option value="1">是</option>
+					</select>
+				  	<span style="width: 155px" class="input-group-addon">按是否交押金搜索</span>
+				  	<select class="form-control" style="width: 180px" id="searchePledge" name="searchePledge">
+						<option value="">请选是否缴纳押金</option>
+						<option value="0">否</option>
+						<option value="1">是</option>
+					</select>
+				  	<span style="width: 155px" class="input-group-addon">按是否正在用车搜索</span>
+				  	<select class="form-control" style="width: 180px" id="searcheState" name="searcheState">
+						<option value="">请选择用车状态</option>
+						<option value="0">否</option>
+						<option value="1">是</option>
+					</select>
+				</div>
+				<div>
+					<button type="submit" style="width: 150px" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span>搜索</button>
+					<button type="reset" style="width: 150px" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span>重置搜索</button>
+					<button type="button" style="width: 150px" class="btn btn-primary"><span class="glyphicon glyphicon-save"></span>导出</button>
+					<button type="button" style="width: 150px" class="btn btn-primary" data-toggle="model" onclick="opwen1(1);"><span class="glyphicon glyphicon-plus-sign" ></span>增加金额</button>
+					<button type="button" style="width: 150px" class="btn btn-primary" data-toggle="model" onclick="opwen2();"><span class="glyphicon glyphicon-minus-sign" ></span>违规扣款</button>
+					<button type="button" style="width: 150px" class="btn btn-primary" data-toggle="model" onclick="opwen3();"><span class="glyphicon glyphicon-remove-sign" ></span>冻结账号</button>
+				</div>
+			</div>
+		</form>
+		<div class="modal fade" id="myModal" tabindex="-1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title">活动赠送</h4>
+				    </div>
+					<form action=""  method="post"> 
+					    <div class="modal-body">
+					        <div class="form-group">
+					        	<label>赠送金额：</label>
+					        	<input type="text" class="form-control" name="amount" id="amount"/>
+					        </div>
+					    </div>
+					    <div class="modal-footer">
+					        <button type="reset" class="btn btn-default">取消</button>
+					        <button type="submit" class="btn btn-primary">确认</button>
+						</div>
+					</form>	
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+		<div class="modal fade" id="myModal1" tabindex="-1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title">违规扣款</h4>
+				    </div>
+					<form action=""  method="post"> 
+					    <div class="modal-body">
+					    	<input type="hidden" name="eid" id="eid" value=""/>
+					        <div class="form-group">
+					        	<label>扣款金额：</label>
+					        	<input type="text" class="form-control" name="userName" id="userName"/>
+					        </div>
+					    </div>
+					    <div class="modal-footer">
+					        <button type="reset" class="btn btn-default">取消</button>
+					        <button type="submit" class="btn btn-primary">确认</button>
+						</div>
+					</form>	
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+		<div class="modal fade" id="myModal2" tabindex="-1">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+				        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				        <h4 class="modal-title">账号冻结 </h4>
+				    </div>
+					<form action=""  method="post"> 
+					    <div class="modal-body">
+					    	<input type="hidden" name="eid" id="eid" value=""/>
+					        <div class="form-group">
+					        	<label>是否冻结该用户：</label>
+					        	<select class="form-control">
+					        		<option value="">请选择</option>
+					        		<option value="0">否</option>
+					        		<option value="1">是</option>
+					        	</select>
+					        </div>
+					    </div>
+					    <div class="modal-footer">
+					        <button type="reset" class="btn btn-default">取消</button>
+					        <button type="submit" class="btn btn-primary">确认</button>
+						</div>
+					</form>	
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div>
+		<table class="table table-striped table-bordered table-condensed" style="margin-top:1%;">
+			<tr>
+				<th><input type="checkbox" /></th>
+				<th>编号</th>
+				<th>账号</th>
+				<th>密码</th>
+				<th>姓名</th>
+				<th>余额</th>
+				<th>积分</th>
+				<th>信用</th>
+				<th>是否冻结</th>
+				<th>押金</th>
+				<th>用车时间</th>
+				<th>是否正在用车</th>
+			</tr>
+			<foreach name="page.rows" item="u">
+				<tr>
+					<td><input type="checkbox" name="cbx" value="{$u.uid}"/></td>
+					<td>{$u.uid}</td>
+					<td>{$u.uaccount}</td>
+					<td>{$u.upassword}</td>
+					<td>{$u.utruename}</td>
+					<td>{$u.umoney}</td>
+					<td>{$u.ucredit}</td>
+					<td>
+						<if condition="($u.uintegral eq 0)">很差
+							<elseif condition="$u.uintegral eq 1"/>较差
+							<elseif condition="$u.uintegral eq 2"/>一般
+							<elseif condition="$u.uintegral eq 3"/>良好
+							<else/>非常好
+						</if>
+					</td>
+					<td>
+						<if condition="($u.uisfrozen eq 0)">否
+							<else/>是
+						</if>
+					</td>
+					<td>
+						<if condition="($u.upledge eq 0)">否
+							<else/>是
+						</if>
+					</td>
+					<td>{$u.ualltime}</td>
+					<td>
+						<if condition="($u.ustate eq 0)">否
+							<else/>是
+						</if>
+					</td>
+				</tr>
+			</foreach>
+		</table>
+		<nav aria-label="Page navigation" class="text-center">
+			<ul class="pagination">
+				<li><a href="javascript:return false;">当前显示第<span style="color:red;">{$page.pageNo}</span>页</a></li>
+			    <li>
+			      	<a href="javascript:turnpage({$page.pageNo},{$page.pageSize},-1);" aria-label="Previous">
+			        	<span aria-hidden="true">&laquo;</span>
+			      	</a>
+			    </li>
+			    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},1);">1</a></li>
+			    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},2);">2</a></li>
+			    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},3);">3</a></li>
+			    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},4);">4</a></li>
+			    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},5);">5</a></li>
+			    <li>
+			      	<a href="javascript:turnpage({$page.pageNo},{$page.pageSize},0);" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			      	</a>
+			    </li>
+			    <li><a href="javascript:return false;">共<span style="color:red;">{$page.total}</span>条数据</a></li>
+			</ul>
+		</nav>
+	</body>
+</html>

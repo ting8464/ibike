@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>公告一览</title>
+		<link rel="stylesheet" href="{$BAH}Public/bootstrap/css/bootstrap.css" />
+		<script type="text/javascript" src="{$BAH}Public/bootstrap/js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="{$BAH}Public/bootstrap/js/bootstrap.min.js" ></script>
+		<script type="text/javascript">
+		function turnpage(pageNo,pageSize,type){
+			if(type == -1){
+				pageNo = pageNo-1;
+				if(pageNo == 0){
+					alert("已经是第一页了");
+					return;
+				}
+			}else if(type == 0){
+				pageNo = pageNo+1;
+				var a=parseInt({$page.total} / pageSize);
+				var b=parseInt({$page.total} % pageSize);
+				if(b > 0){
+					a +=1;
+				}
+				if(pageNo > a){
+					alert("已经是最后一页了");
+					return;
+				}
+				
+			}else{
+				pageNo = type;
+				
+			}
+			location.href="{$BAH}index.php/Home/Notice/setnoticeGeneral?pageNo="+pageNo+"&pageSize="+pageSize;
+		}
+		</script>
+	</head>
+	<body>
+		
+		<table class="table table-striped table-bordered table-condensed" style="margin-top:1%;">
+			<tr>
+				<th><input type="checkbox" /></th>
+				<th>活动项目</th>
+				<th>活动内容</th>
+				<th>开始时间</th>
+				<th>结束时间</th>
+			</tr>
+			<foreach name="page.rows" item="u">
+				<tr>
+					<td><input type="checkbox" name="cbx" value="{$u.tid}"/></td>
+					<td>{$u.tname}</td>
+					<td>{$u.tcontent}</td>
+					<td>{$u.ttime}</td>
+					<td>{$u.tid}</td>
+				</tr>
+			</foreach>
+		</table>
+		<nav aria-label="Page navigation" class="text-center">
+			<ul class="pagination">
+				<li><a href="javascript:return false;">当前显示第<span style="color:red;">{$page.pageNo}</span>页</a></li>
+			    <li>
+			      	<a href="javascript:turnpage({$page.pageNo},{$page.pageSize},-1);" aria-label="Previous">
+			        	<span aria-hidden="true">&laquo;</span>
+			      	</a>
+			    </li>
+			    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},1);">1</a></li>
+			    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},2);">2</a></li>
+			    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},3);">3</a></li>
+			    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},4);">4</a></li>
+			    <li><a href="javascript:turnpage({$page.pageNo},{$page.pageSize},5);">5</a></li>
+			    <li>
+			      	<a href="javascript:turnpage({$page.pageNo},{$page.pageSize},0);" aria-label="Next">
+			        	<span aria-hidden="true">&raquo;</span>
+			      	</a>
+			    </li>
+			    <li><a href="javascript:return false;">共<span style="color:red;">{$page.total}</span>条数据</a></li>
+			</ul>
+		</nav>
+	</body>
+</html>
