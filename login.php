@@ -61,7 +61,7 @@ session_start();
 			     }
 			?>
 			<div id="form">
-				<form action="index.php/Home/User/login" method="post" class="form-horizontal" onsubmit="return checkForm(this)">
+				<form action="index.php/Home/Login/login" method="post" class="form-horizontal" onsubmit="return checkForm(this)">
 					<div class="form-group form-inline has-feedback">
 						<label style="text-align: right;width: 20%;color: white;">帐号：</label>
 						<div class="input-group " style="width: 70%;"><!--//按钮加图标-->
