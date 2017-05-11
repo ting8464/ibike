@@ -13,9 +13,9 @@
 			$(function(){
 				$("#uAccount").val("{$uAccount}");
 				$("#ucCost").val("{$ucCost}");
-				if({$searchRelation}==0){
+				if("{$searchRelation}" == "0"){
 					$("#eq").prop("checked",true);
-				}else if({$searchRelation}==1){
+				}else if("{$searchRelation}" == "1"){
 					$("#gt").prop("checked",true);
 				}else{
 					$("#lt").prop("checked",true);
@@ -37,14 +37,26 @@
 			}
 			
 			function creatExcel(){
-				var data = Array();
-				alert($("#mytable tr:eq(0) th:eq(1)").val());
+				var data = new Array();
+				
 				for(var i = 0; i < $("#mytable tr").length; i++){
 					data[i] = i;
-					for(var j = 0; j < $("#mytable tr th").length; j++){
-						data[i][j] = $("#mytable tr th").eq(j).val();
+					for(var j = 1; j < $("#mytable tr:eq(0) th").length; j++){
+						data[i] = new Array();
+						data[i][j] = "";
+					}
+					
+					if(i == 0){
+						for(var j = 1; j < $("#mytable tr:eq("+i+") th").length; j++){
+							data[i][j] = $("#mytable tr:eq("+i+") th").eq(j).text();
+						}
+					}else{
+						for(var j = 1; j < $("#mytable tr:eq("+i+") td").length; j++){
+							data[i][j] = $("#mytable tr:eq("+i+") td").eq(j).text();
+						}
 					}
 				}
+				
 			}  
 		
 		</script>
