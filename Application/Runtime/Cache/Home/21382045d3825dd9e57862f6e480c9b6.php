@@ -114,7 +114,6 @@
 				<th>编号</th>
 				<th>平台位置</th>
 				<th>是否启用</th>
-				
 			</tr>
 			<?php if(is_array($Platforms["rows"])): foreach($Platforms["rows"] as $key=>$p): ?><tr>
 					<td><input type="checkbox" name="pId" value="<?php echo ($p["pid"]); ?>"/></td>

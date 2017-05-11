@@ -15,14 +15,18 @@ class PlatformController extends Controller{
      * @param unknown $pPosition 
      * @param unknown $pIsUsed
      */
-    public  function  addPlatform($pPosition,$pIsUsed){
-        $array=array(
-            "pPosition"=>$pPosition,
-            "pIsUsed"=>$pIsUsed
-        );
-        $result=$this->platformMode->add($array);
-        $this->assign("result",$result);
-       // $this->display("");//跳转页面
+    public  function  addPlatform($pPosition =null,$pIsUsed=null){
+        if($pPosition!=null && $pIsUsed !=null){
+            $array=array(
+                "pPosition"=>$pPosition,
+                "pIsUsed"=>$pIsUsed
+            );
+            $result=$this->platformMode->add($array);
+            $this->assign("result",$result);
+        }
+        
+        $this->assign("BASEPATH",BASEPATH);//保存数据方便页面使用
+        $this->display("addBikePlatform");//跳转页面
     }
     /**
      * 同步提交增加或者修改平台

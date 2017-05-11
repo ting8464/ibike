@@ -1,4 +1,5 @@
 <?php
+session_start();
 ?>
 <!DOCTYPE html>
 <html>
@@ -53,15 +54,21 @@
 			<div id="portrait">
 				<img src="Public/img/tou.jpg" style="border-radius:100px;width: 100%;height: 100%;"/>
 			</div>
+			<?php 
+			     if(isset($_SESSION["loginErro"])){
+			         echo $_SESSION["loginErro"];
+			         unset($_SESSION["loginErro"]);
+			     }
+			?>
 			<div id="form">
-				<form action="index.php/Home/Manager/login" method="post" class="form-horizontal" onsubmit="return checkForm(this)">
+				<form action="index.php/Home/User/login" method="post" class="form-horizontal" onsubmit="return checkForm(this)">
 					<div class="form-group form-inline has-feedback">
 						<label style="text-align: right;width: 20%;color: white;">帐号：</label>
 						<div class="input-group " style="width: 70%;"><!--//按钮加图标-->
 					  		<span class="input-group-addon">
 					  			<span class="glyphicon glyphicon-user"></span><!--//这就是图标-->
 					  		</span>
-							<input type="text" class="form-control has-error nam" name="" id="" style="width: 90%;" placeholder="请输入6-12位数字的帐号" onfocus="a1(this)" onblur="aaa(this,/^[0-9]{6,12}$/)"/>    <!--用户名只能是数字-->
+							<input type="text" class="form-control has-error nam" name="user" id="user" style="width: 90%;" placeholder="请输入6-12位数字的帐号" onfocus="a1(this)" onblur="aaa(this,/^[0-9]{6,12}$/)"/>    <!--用户名只能是数字-->
 						</div>
 						<span class="glyphicon glyphicon-remove" style="display: none;"></span>
 						<label style="width: 20%;"></label>
