@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>消费一览</title>
+		<link rel="stylesheet" href="{$BASEPATH}Public/bootstrap/css/bootstrap.css" />
+		<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/bootstrap.min.js" ></script>
+		<style type="text/css">
+			#mytable td,th{text-align:center;}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				$("#uAccount").val("{$uAccount}");
+				$("#ucCost").val("{$ucCost}");
+				if({$searchRelation}==0){
+					$("#eq").prop("checked",true);
+				}else if({$searchRelation}==1){
+					$("#gt").prop("checked",true);
+				}else{
+					$("#lt").prop("checked",true);
+				}
+			});
+			//跳转页面，type=0表示按值跳转，type=1表示向前跳转，type=2表示向后跳转
+			function turnPage(pageNo,pageSize,type=0){
+				if(type == 2){
+					window.location.href="{$BASEPATH}index.php/Home/Finance/userCostList?pageNo="+(pageNo+1);
+				}else if(type == 1){
+					if(pageNo == 1){
+						alert("当前已经是第一页了");
+					}else{
+						window.location.href="{$BASEPATH}index.php/Home/Finance/userCostList?pageNo="+(pageNo-1);
+					}
+				}else{
+					window.location.href="{$BASEPATH}index.php/Home/Finance/userCostList?pageNo="+pageNo;
+				}
+			}
+			
+			function creatExcel(){
+				var data = Array();
+				alert($("#mytable tr:eq(0) th:eq(1)").val());
+				for(var i = 0; i < $("#mytable tr").length; i++){
+					data[i] = i;
+					for(var j = 0; j < $("#mytable tr th").length; j++){
+						data[i][j] = $("#mytable tr th").eq(j).val();
+					}
+				}
+			}  
+		
+		</script>
+	</head>
+	<body>
+		<div style="margin:1%;">
+			<div >
+				<form action = "{$BASEPATH}index.php/Home/Finance/userCostList" method="post">
+					<span>快速检索：</span>
+					<span>
+						<label>用户账号:</label>
+	            		<input type="text" style="width:7%" id="uAccount" name = "uAccount"/>
+					</span>
+					&nbsp;&nbsp;
+					<span>
+						<label>消费金额:</label>
+	            		<input type="text" style="width:7%" id="ucCost" name = "ucCost"/>
+					</span>
+					<input type="radio" id="eq" name="searchRelation" checked="checked" value="0"/>等于
+					<input type="radio" id="gt" name="searchRelation" value="1"/>大于
+					<input type="radio" id="lt" name="searchRelation" value="2"/>小于
+					&nbsp;&nbsp;
+					<input type="submit" value="搜索"/>
+					<input type="reset" value="重置"/>
+				</form>
+			</div>
+			<button type="button" onclick="creatExcel();" class="btn btn-sm-info"><span class="glyphicon glyphicon-floppy-save"></span>导出Excel</button>
+			<br/>
+			<label>当前已消费总金额：<span style="color:Red;">{$sum}</span></label>
+		</div>
+		<table id="mytable" class ="table table-hover table-bordered table-striped" style = "width: 98%;margin:1%">
+			<tr>
+				<th><input type="checkbox"/>多选框</th>
+				<th>用户账号</th>
+				<th>开始租车时间</th>
+				<th>结束租车时间</th>
+				<th>共计时长</th>
+				<th>共计消费金额</th>
+			</tr>
+			<volist name="page.rows" id="m1">
+				<tr>
+					<td><input type="checkbox" value="{$m1.ucid}"/></td>
+					<td>{$m1.uaccount}</td>
+					<td>{$m1.rbstarttime}</td>
+					<td>{$m1.rbendtime}</td>
+					<td>{$m1.uctime}</td>
+					<td>{$m1.uccost}</td>
+				</tr>
+			</volist>
+		</table>
+		<div style="margin-top:20px;" class="text-center">
+			<ul class="pagination" style="margin-top: -10px;">
+				<li><a href="javascript:void(0);">当前第<span style="color:red;">{$page.pageNo}</span>页</a></li>
+                <li><a href="javascript:turnPage({$page.pageNo},2,1);" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                <li class="active"><a href="javascript:turnPage(1,2);">1</a></li>
+                <li><a href="javascript:turnPage(2,2);">2</a></li>
+                <li><a href="javascript:turnPage(3,2);">3</a></li>
+                <li><a href="javascript:turnPage(4,2);">4</a></li>
+                <li><a href="javascript:turnPage(5,2);">5</a></li>
+                <li><a href="javascript:turnPage({$page.pageNo},2,2);" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                <li><a href="javascript:void(0);">共<span style="color:red;">{$page.total}</span>条记录</a></li>
+           	</ul>
+		</div>
+	</body>
+</html>

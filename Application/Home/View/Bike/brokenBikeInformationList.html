@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>异常单车</title>
+		<link rel="stylesheet" href="{$BASEPATH}Public/bootstrap/css/bootstrap.css" />
+		<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/jquery-1.9.1.min.js" ></script>
+		<script type="text/javascript" src="{$BASEPATH}Public/bootstrap/js/bootstrap.min.js" ></script>
+		<style type="text/css">
+			#mytable td,th{text-align:center;}
+		</style>
+		<script type="text/javascript">
+			$(function(){
+				$("#bNo").val("{$bNo}");
+				$("#bIsUsed").val("{$bIsUsed}");
+				$("#bsetPosition").val("{$bsetPosition}");
+			});
+			
+			//跳转页面，type=0表示按值跳转，type=1表示向前跳转，type=2表示向后跳转
+			function turnPage(pageNo,pageSize,type=0){
+				if(type == 2){
+					window.location.href="{$BASEPATH}index.php/Home/Bike/loadBikeByPage?pageNo="+(pageNo+1)+"&broken=0";
+				}else if(type == 1){
+					if(pageNo == 1){
+						alert("当前已经是第一页了");
+					}else{
+						window.location.href="{$BASEPATH}index.php/Home/Bike/loadBikeByPage?pageNo="+(pageNo-1)+"&broken=0";
+					}
+				}else{
+					window.location.href="{$BASEPATH}index.php/Home/Bike/loadBikeByPage?pageNo="+pageNo+"&broken=0";
+				}
+			}
+			function mark(){
+				var hid = $("#mytable input:checked");
+				if(hid.length == 0){
+					alert("对不起，请先选择一行进行编辑！！！");
+					return;
+				}
+				var selectedBike = Array();
+				for(var i = 0; i<hid.length; i++){
+					if(hid.eq(i).val() != "" && hid.eq(i).val() != null){
+						selectedBike.push(hid.eq(i).val());
+					}
+				}
+				$("#selectedBike").val(selectedBike);
+				$("#changeBikeState").submit();
+			}
+		</script>
+	</head>
+	<body>
+		<div style="margin:1%;">
+			<div >
+				<form action = "{$BASEPATH}index.php/Home/Bike/loadBikeByPage?broken=0" method="post">
+					<span>快速检索：</span>
+					<span>
+						<label>单车编号:</label>
+	            		<input type="text" style="width:7%" id="bNo" name = "bNo"/>
+					</span>
+					&nbsp;&nbsp;
+					<span >
+						<label>单车是否正在被使用:</label>
+						<select id="bIsUsed" name = "bIsUsed">
+							<option value="">请选择用车状态</option>
+							<option value=0>否</option>
+							<option value=1>是</option>
+						</select>
+					</span>
+					&nbsp;&nbsp;
+					<span>
+						<label>单车投放位置:</label>
+						<select id="bsetPosition" name="bsetPosition">
+							<option value="">请选择单车投放位置</option>
+							<volist name="pPosition" id="p1">
+								<option value="{$p1.pid}">{$p1.pposition}</option>
+							</volist>
+						</select>
+					</span>
+					<input type="submit" value="搜索"/>
+					<input type="reset" value="重置"/>
+				</form>
+			</div>
+			<div>
+				<form id="changeBikeState" action="{$BASEPATH}index.php/Home/Bike/changeBikeState" method="post">
+					<input type="hidden" name="manage" value="0"/>
+					<input name="broken" type="hidden" value="0"/>
+					<input type="hidden" name="selectedBike" id="selectedBike"/>
+					<button type="button" onclick="mark();" class="btn btn-sm-info"><span class="glyphicon glyphicon-random"></span>&nbsp;解除异常</button>
+				</form>
+			</div>
+		</div>
+		<table id="mytable" class ="table table-hover table-bordered table-striped" style = "width: 98%;margin:1%">
+			<tr>
+				<th><input type="checkbox" value=""/>多选框</th>
+				<th>单车编号</th>
+				<th>单车是否正在被使用</th>
+				<th>单车车况</th>
+				<th>单车所在位置</th>
+				<th>单车投放位置</th>
+				<th>单车已行驶路程</th>
+			</tr>
+			<volist name="page.rows" id="m1">
+				<tr>
+					<td><input type="checkbox" value="{$m1.bid}"/></td>
+					<td>{$m1.bno}</td>
+					<td>
+						<if condition="($m1.bisused eq 0)">否
+						<else/>是
+						</if>
+					</td>
+					<td>
+						<if condition="($m1.bstate eq 0)">正常
+						<elseif condition="$m1.bstate eq 1"/>损坏
+						<else/>报废
+						</if>
+					</td>
+					<td>{$m1.bposition}</td>
+					<td>{$m1.pposition}</td>
+					<td>{$m1.ballroute}</td>
+				</tr>
+			</volist>
+		</table>
+		<div style="margin-top:20px;" class="text-center">
+			<ul class="pagination" style="margin-top: -10px;">
+				<li><a href="javascript:void(0);">当前第<span style="color:red;">{$page.pageNo}</span>页</a></li>
+                <li><a href="javascript:turnPage({$page.pageNo},2,1);" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                <li><a href="javascript:turnPage(1,2);">1</a></li>
+                <li><a href="javascript:turnPage(2,2);">2</a></li>
+                <li><a href="javascript:turnPage(3,2);">3</a></li>
+                <li><a href="javascript:turnPage(4,2);">4</a></li>
+                <li><a href="javascript:turnPage(5,2);">5</a></li>
+                <li><a href="javascript:turnPage({$page.pageNo},2,2);" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                <li><a href="javascript:void(0);">共<span style="color:red;">{$page.total}</span>条记录</a></li>
+           	</ul>
+		</div>
+	</body>
+</html>
