@@ -138,8 +138,6 @@ class FinanceController extends Controller{
             if($insertResult > 0){
                 $a++;
             }
-
-//             $updateResult = $this->chargeModel->table('tb_user')->where("uid = $temp")->save($updateData);
             $sql = "update tb_user set uisbackpledge=1 where uid=$temp";
             $updateResult = $this->chargeModel->execute($sql);
             if($updateResult > 0){
@@ -158,7 +156,47 @@ class FinanceController extends Controller{
     }
     
     
-    
+    public function userCostList($pageNo=1,$pageSize=10,$uAccount=null,$ucCost=null,$searchRelation=null){
+        $con = array();
+        if($uAccount != null && $uAccount != ""){
+            $con["u1.uAccount"] = array("like","%$uAccount%");
+        };
+        if($ucCost != null && $ucCost != ""){
+            if($searchRelation == 0){
+                $con["uc1.ucCost"] = array("EQ",$ucCost);
+            }elseif ($searchRelation == 1){
+                $con["uc1.ucCost"] = array("GT",$ucCost);
+            }else{
+                $con["uc1.ucCost"] = array("LT",$ucCost);
+            }
+        };
+        
+        $total = $this->chargeModel->table('tb_rentrecord r1,tb_usercost uc1,tb_user u1')->
+        where('r1.rrId = uc1.rrId and uc1.uId = u1.uId')->where($con)->count();
+        
+        $rows = $this->chargeModel->table('tb_rentrecord r1,tb_usercost uc1,tb_user u1')->
+            field('uc1.ucId,u1.uAccount,r1.rbStartTime,r1.rbEndTime,uc1.ucTime,uc1.ucCost')->
+            where('r1.rrId = uc1.rrId and uc1.uId = u1.uId')->where($con)->page($pageNo,$pageSize)->select();
+        
+        $sum = $this->chargeModel->table('tb_rentrecord r1,tb_usercost uc1,tb_user u1')->
+            where('r1.rrId = uc1.rrId and uc1.uId = u1.uId')->where($con)->sum("uc1.ucCost");
+
+        $page = array("total"=>$total, "rows"=>$rows, "pageNo"=>$pageNo, "pageSize"=>$pageSize);
+
+        $this->assign("page",$page);
+
+        $this->assign("uAccount",$uAccount);
+
+        $this->assign("ucCost",$ucCost);
+
+        $this->assign("searchRelation",$searchRelation);
+        
+        $this->assign("sum",$sum);
+        
+        $this->assign("BASEPATH",BASEPATH);
+        //         print_r($page);
+        $this->display("userCostList");
+    }
     
     
     

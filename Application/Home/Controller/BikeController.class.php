@@ -24,7 +24,7 @@ class BikeController extends Controller{
      * @param unknown $bState
      * @param unknown $bsetPosition
      */
-    public function loadBikeByPage($pageNo = 1,$pageSize = 10,$bNo=null,$bIsUsed=null,$bState=null,$bsetPosition=null){
+    public function loadBikeByPage($broken=null,$pageNo = 1,$pageSize = 10,$bNo=null,$bIsUsed=null,$bState=null,$bsetPosition=null){
         $con = array();
         if($bNo != null && $bNo != ""){
             $con["bNo"] = array("like","%$bNo%");
@@ -32,17 +32,21 @@ class BikeController extends Controller{
         if($bIsUsed != null && $bIsUsed != ""){
             $con["bIsUsed"] = array("EQ",$bIsUsed);
         };
-        if($bState != null && $bState != ""){
-            $con["bState"] = array("EQ",$bState);
-        };
+        if($broken != '' && $broken != null){
+            $con["bState"] = array("NEQ",0);
+        }else {
+            if($bState != null && $bState != ""){
+                $con["bState"] = array("EQ",$bState);
+            };
+        }
         if($bsetPosition != null && $bsetPosition != ""){
             $con["bSetPosition"] = array("EQ",$bsetPosition);
         };
-//         print_r($con);
+        
         $total = $this->bikeModel->where($con)->count();
         
         $pPosition = $this->bikeModel->table(tb_platform)->select();
-        //->fetchSql(true)
+        
         $rows = $this->bikeModel->table("tb_bike b1, tb_platform p1")->
         field("b1.bid,b1.bno,b1.bisused,b1.bstate,b1.bposition,b1.ballroute,p1.pposition")->where("b1.bsetposition = p1.pid")
         ->where($con)
@@ -62,8 +66,12 @@ class BikeController extends Controller{
         $this->assign("BASEPATH",BASEPATH);
         
         $this->assign("pPosition",$pPosition);
-//         print_r($page);
-        $this->display("bikeInformationList");
+        
+        if($broken != '' && $broken != null){
+            $this->display("brokenBikeInformationList");
+        }else{
+            $this->display("bikeInformationList");
+        }
     }
     
     /**
@@ -71,10 +79,10 @@ class BikeController extends Controller{
      * @param int $manage
      * @param array $selectedBike
      */
-    public function changeBikeState($manage = null, $selectedBike = null){
+    public function changeBikeState($manage=null,$selectedBike=null,$broken=null){
         $data["bState"] = $manage;
         $result = $this->bikeModel->data($data)->where("bId in ($selectedBike)")->save();
-        $this->loadBikeByPage();
+        $this->loadBikeByPage($broken);
     }
     
     /**

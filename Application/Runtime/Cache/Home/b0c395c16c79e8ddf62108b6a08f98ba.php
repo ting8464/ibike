@@ -63,7 +63,7 @@
 				<th><input type="checkbox"/>多选框</th>
 				<th>用户账号</th>
 				<th>充值金额</th>
-				<th>本次充值时间</th>
+				<th>充值时间</th>
 			</tr>
 			<?php if(is_array($page["rows"])): $i = 0; $__LIST__ = $page["rows"];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$m1): $mod = ($i % 2 );++$i;?><tr>
 					<td><input type="checkbox" value="<?php echo ($m1["rid"]); ?>"/></td>

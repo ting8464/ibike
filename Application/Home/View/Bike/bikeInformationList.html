@@ -39,7 +39,9 @@
 				}
 				var selectedBike = Array();
 				for(var i = 0; i<hid.length; i++){
-					selectedBike[i] = hid.eq(i).val();
+					if(hid.eq(i).val() != "" && hid.eq(i).val() != null){
+						selectedBike.push(hid.eq(i).val());
+					}
 				}
 				$("#selectedBike").val(selectedBike);
 				$("#changeBikeState").submit();
@@ -91,20 +93,18 @@
 			<div>
 				<form id="changeBikeState" action="{$BASEPATH}index.php/Home/Bike/changeBikeState" method="post">
 					<span>故障标记：</span>
-					<input name="manage" checked value="0" type="radio"/>正常
-					<input name="manage" value="1" type="radio"/>损坏
+					<input name="manage" checked value="1" type="radio"/>损坏
 					<input name="manage" value="2" type="radio"/>报废
 					<input type="hidden" name="selectedBike" id="selectedBike"/>
 					<button type="button" onclick="mark();">确认</button>
 				</form>
 			</div>
-			<button type="button" onclick="addOrUpdateHouse(0)" class="btn btn-sm-info"><span class="glyphicon glyphicon-plus"></span>新增</button>
-			<button type="button" onclick="addOrUpdateHouse(1)" class="btn btn-sm-info"><span class="glyphicon glyphicon-pencil"></span>修改</button>
+			<button type="button" class="btn btn-sm-info"><span class="glyphicon glyphicon-cloud"></span>定位纠正</button>
 			<button type="button" class="btn btn-sm-info"><span class="glyphicon glyphicon-trash"></span>删除</button>
 		</div>
 		<table id="mytable" class ="table table-hover table-bordered table-striped" style = "width: 98%;margin:1%">
 			<tr>
-				<th><input type="checkbox"/>多选框</th>
+				<th><input type="checkbox" value=""/>多选框</th>
 				<th>单车编号</th>
 				<th>单车是否正在被使用</th>
 				<th>单车车况</th>

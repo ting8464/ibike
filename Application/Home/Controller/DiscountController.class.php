@@ -101,6 +101,20 @@ class DiscountController extends Controller{
         echo $addResult;
     }
     
+    /**
+     * 删除选定优惠券
+     * @param unknown $dids
+     */
+    public function deleteDiscount($dids){
+        $deleteResult = $this->discountModel->where("dId in ($dids)")->delete();
+        echo $deleteResult;
+    }
+    
+    
+    
+    
+    
+    
 }
 
 ?>

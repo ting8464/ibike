@@ -36,6 +36,7 @@
 					window.location.href="{$BASEPATH}index.php/Home/Discount/discountListByPage?pageNo="+pageNo;
 				}
 			}
+			//修改优惠券
 			function updateDiscount(){
 				did = $("#mytable input:checked");
 				$("#cancel").click();
@@ -57,6 +58,29 @@
                    	},"json");
 					$("#openWin").click();
 		        }
+			}
+			function deleteDiscount(){
+				did = $("#mytable input:checked");
+				if(did.length == 0){
+					alert("对不起，请先选择一行进行编辑！！！");
+					return;
+				}
+				if(confirm("你确定删除吗？")){
+					var dids = Array();
+					for(var i=0; i<did.length; i++){
+						if(did.eq(i).val() != null && did.eq(i).val() != ""){
+							dids.push(did.eq(i).val());
+						}
+					}
+					$.post("{$BASEPATH}index.php/Home/Discount/deleteDiscount?dids="+dids,function(data){
+						if(data > 0){
+							alert("删除数据成功，正在重新加载！");
+						}else{
+							alert("删除数据失败，正在重新加载！");
+						}
+						window.location.href="";
+	               	},"json");
+				}
 			}
 		</script>
 	</head>
@@ -83,8 +107,8 @@
 				</form>
 			</div>
 			<button style="display:none;" "button" data-toggle="modal" data-target="#myModal" id="openWin">
-			<button type="button" onclick="updateDiscount()" class="btn btn-sm-info"><span class="glyphicon glyphicon-pencil"></span>修改</button>
-			<button type="button" class="btn btn-sm-info"><span class="glyphicon glyphicon-trash"></span>删除</button>
+			<button type="button" onclick="updateDiscount();" class="btn btn-sm-info"><span class="glyphicon glyphicon-pencil"></span>修改</button>
+			<button type="button" onclick="deleteDiscount();" class="btn btn-sm-info"><span class="glyphicon glyphicon-trash"></span>删除</button>
 		</div>
 		<table id="mytable" class ="table table-hover table-bordered table-striped" style = "width: 98%;margin:1%">
 			<tr>
